@@ -19,6 +19,7 @@ ADD .config/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 ADD .config/supervisord.conf /.config/
 ADD .config/bashrc/.bashrc $HOME/.bashrc
 ADD .config/bashrc/.bash_profile $HOME/.bash_profile
+COPY packages/*  $HOME/.packages/
 
 ##############################################################################
 # ENVs
@@ -75,15 +76,16 @@ RUN apt-get update \
     && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc" \
-    && ~/.conda/bin/conda config --add channels conda-forge \
-    && ~/.conda/bin/conda config --add channels bioconda \
-    && ~/.conda/bin/conda config --add channels anaconda \
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels anaconda \
     && pip install scif \
-    && ~/.conda/bin/conda update --all && ~/.conda/bin/conda clean -tipsy
-    
+    && conda update --all && conda clean -tipsy \
+    && \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
+    scif install $HOME/.packages/dvc.scif
     
 EXPOSE 6000
 EXPOSE 8888
