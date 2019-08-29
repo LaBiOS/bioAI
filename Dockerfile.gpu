@@ -85,7 +85,8 @@ RUN apt-get update \
 # Install packages through Scif
 ##############################################################################
     scif install $HOME/.packages/dvc.scif \
-    && scif install $HOME/.packages/cuda.scif
+    && scif install $HOME/.packages/cuda.scif \
+    && scif install $HOME/.packages/cdnn.scif
 
     
 EXPOSE 6000
