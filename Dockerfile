@@ -79,7 +79,7 @@ RUN apt-get update \
 # Install Miniconda dependencies
 ##############################################################################
     wget --quiet ${repconda} \
-    && /bin/bash Miniconda2-latest-Linux-x86_64.sh -b -p ${CONDA_DIR} \
+    && /bin/bash ${PYTHON3_VERSION}-latest-Linux-x86_64.sh -b -p ${CONDA_DIR} \
     && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
     && conda config --add channels defaults \
     && conda config --add channels conda-forge \
