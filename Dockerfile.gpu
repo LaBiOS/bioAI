@@ -51,7 +51,7 @@ ENV repdvc="https://dvc.org/deb/dvc.list"
 RUN apt-get update \
     && LIBPNG="$(apt-cache depends libpng-dev | grep 'Depends: libpng' | awk '{print $2}')" \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated \
-    --no-install-recommends bash git zip wget libssl1.0.0 \
+    --no-install-recommends bash git zip wget libssl1.0.0 apt-utils \
     ca-certificates locales mlocate debconf curl build-essential \
     curl vim bzip2 sudo automake cmake sed grep x11-utils xvfb openssl \
     libxtst6 libxcomposite1 $LIBPNG stunnel \
