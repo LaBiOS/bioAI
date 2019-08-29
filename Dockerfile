@@ -4,7 +4,7 @@ MAINTAINER Fabiano Menegidio <fabiano.menegidio@biology.bio.br>
 ##############################################################################
 # Metadata
 ##############################################################################
-LABEL base.image="bioAI:latest"
+LABEL base.image="bioAI:gpu"
 LABEL version="1"
 LABEL description=""
 LABEL website=""
