@@ -88,7 +88,6 @@ RUN apt-get update \
     && conda update --all && conda clean -tipsy \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc"
-
     
 EXPOSE 6000
 EXPOSE 8888
