@@ -76,9 +76,6 @@ RUN apt-get update \
     && conda config --add channels conda-forge \
     && conda config --add channels bioconda \
     && conda config --add channels anaconda \
-    && conda config --add channels toli \
-    && conda config --add channels gregvonkuster \
-    && conda config --add channels hcc \
     && pip install scif \
     && conda update --all && conda clean -tipsy \
     && /bin/bash -c "exec $SHELL -l" \
