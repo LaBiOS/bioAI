@@ -20,6 +20,9 @@ ADD .config/supervisord.conf /.config/
 ADD .config/bashrc/.bashrc $HOME/.bashrc
 ADD .config/bashrc/.bash_profile $HOME/.bash_profile
 ADD packages/dvc.scif /root/.packages/
+ADD packages/cuda.scif /root/.packages/
+ADD packages/cdnn.scif /root/.packages/
+ADD packages/jupyter.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -86,7 +89,8 @@ RUN apt-get update \
 ##############################################################################
     scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/cuda.scif \
-    && scif install $HOME/.packages/cdnn.scif
+    && scif install $HOME/.packages/cdnn.scif \
+    && scif install $HOME/.packages/jupyter.scif
 
     
 EXPOSE 6000
