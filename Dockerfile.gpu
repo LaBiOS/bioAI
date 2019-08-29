@@ -53,7 +53,7 @@ ENV repnvidia-ml="https://developer.download.nvidia.com/compute/machine-learning
 ##############################################################################
 RUN apt-get update \
     && LIBPNG="$(apt-cache depends libpng-dev | grep 'Depends: libpng' | awk '{print $2}')" \
-    && apt-get install -y --allow-unauthenticated \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated \
     --no-install-recommends bash git zip wget libssl1.0.0 \
     ca-certificates locales mlocate debconf curl build-essential \
     curl vim bzip2 sudo automake cmake sed grep x11-utils xvfb openssl \
