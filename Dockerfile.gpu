@@ -74,12 +74,12 @@ RUN apt-get update \
     && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc" \
-    && conda config --add channels defaults \
-    && conda config --add channels conda-forge \
-    && conda config --add channels bioconda \
-    && conda config --add channels anaconda \
+    && ~/.conda/bin/conda config --add channels defaults \
+    && ~/.conda/bin/conda --add channels conda-forge \
+    && ~/.conda/bin/conda config --add channels bioconda \
+    && ~/.conda/bin/conda config --add channels anaconda \
     && pip install scif \
-    && conda update --all && conda clean -tipsy
+    && ~/.conda/bin/conda update --all && ~/.conda/bin/conda clean -tipsy
     
 ##############################################################################
 # Install packages through Scif
