@@ -23,6 +23,7 @@ ADD .config/bashrc/.bash_profile $HOME/.bash_profile
 ##############################################################################
 # ENVs
 ##############################################################################
+ARG DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
 ENV HOME /root
