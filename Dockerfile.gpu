@@ -75,7 +75,6 @@ RUN apt-get update \
     && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc" \
-    && ~/.conda/bin/conda config --add channels defaults \
     && ~/.conda/bin/conda config --add channels conda-forge \
     && ~/.conda/bin/conda config --add channels bioconda \
     && ~/.conda/bin/conda config --add channels anaconda \
