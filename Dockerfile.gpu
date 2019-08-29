@@ -19,7 +19,7 @@ ADD .config/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 ADD .config/supervisord.conf /.config/
 ADD .config/bashrc/.bashrc $HOME/.bashrc
 ADD .config/bashrc/.bash_profile $HOME/.bash_profile
-COPY packages/*  $HOME/.packages/
+ADD packages/dvc.scif /root/.packages/
 
 ##############################################################################
 # ENVs
