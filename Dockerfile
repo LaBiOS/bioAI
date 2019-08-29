@@ -42,11 +42,11 @@ ENV CONDA_DIR $HOME/.$PYTHON3_VERSION/
 ##############################################################################
 # Repositories
 ##############################################################################
-ENV repconda https://repo.continuum.io/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh
-ENV repdvc https://dvc.org/deb/dvc.list
-ENV keynvidia https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-ENV repcuda https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64
-ENV repnvidia-ml https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64
+ENV repconda="https://repo.continuum.io/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh"
+ENV repdvc="https://dvc.org/deb/dvc.list"
+ENV keynvidia="https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub"
+ENV repcuda="https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64"
+ENV repnvidia-ml="https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64"
 
 ##############################################################################
 # Install base dependencies
@@ -58,7 +58,7 @@ RUN apt-get update \
     ca-certificates locales mlocate debconf curl build-essential \
     curl vim bzip2 sudo automake cmake sed grep x11-utils xvfb openssl \
     libxtst6 libxcomposite1 $LIBPNG stunnel \
-    && wget ${repodvc} -O /etc/apt/sources.list.d/dvc.list \
+    && wget "${repodvc}" -O /etc/apt/sources.list.d/dvc.list \
     && apt-get update \
     && apt-get clean && apt-get autoclean && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
@@ -78,7 +78,7 @@ RUN apt-get update \
 ##############################################################################
 # Install Miniconda dependencies
 ##############################################################################
-    wget --quiet ${repconda} \
+    wget --quiet "${repconda}" \
     && /bin/bash ${PYTHON3_VERSION}-latest-Linux-x86_64.sh -b -p ${CONDA_DIR} \
     && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
     && conda config --add channels defaults \
