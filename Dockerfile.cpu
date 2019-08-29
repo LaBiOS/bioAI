@@ -1,0 +1,83 @@
+FROM ubuntu:18.04
+MAINTAINER Fabiano Menegidio <fabiano.menegidio@biology.bio.br>
+
+##############################################################################
+# Metadata
+##############################################################################
+LABEL base.image="bioAI:cpu"
+LABEL version="1"
+LABEL description=""
+LABEL website=""
+LABEL documentation=""
+
+##############################################################################
+# ADD config files
+##############################################################################
+ADD .config/start.sh /start.sh
+ADD .config/start-notebook.sh /usr/local/bin/
+ADD .config/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
+ADD .config/supervisord.conf /.config/
+ADD .config/bashrc/.bashrc $HOME/.bashrc
+ADD .config/bashrc/.bash_profile $HOME/.bash_profile
+
+##############################################################################
+# ENVs
+##############################################################################
+ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
+ENV SHELL /bin/bash
+ENV HOME /root
+ENV PYTHON3_VERSION Miniconda3-latest
+ENV PYTHON2_VERSION Miniconda2-latest
+ENV JUPYTER_TYPE notebook
+ENV JUPYTER_PORT 8888
+ENV CONDA_DIR $HOME/.$PYTHON3_VERSION/
+
+##############################################################################
+# Install base dependencies
+##############################################################################
+RUN apt-get update \
+    && LIBPNG="$(apt-cache depends libpng-dev | grep 'Depends: libpng' | awk '{print $2}')" \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated \
+    --no-install-recommends bash git zip wget libssl1.0.0 apt-utils \
+    ca-certificates locales mlocate debconf curl build-essential \
+    curl vim bzip2 sudo automake cmake sed grep x11-utils xvfb openssl \
+    libxtst6 libxcomposite1 $LIBPNG stunnel \
+    && wget https://dvc.org/deb/dvc.list -O /etc/apt/sources.list.d/dvc.list \
+    && apt-get update \
+    && apt-get clean && apt-get autoclean && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
+    && echo "LC_ALL=en_US.UTF-8" >> /etc/environment \
+    && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && echo "LANG=en_US.UTF-8" > /etc/locale.conf \
+    && locale-gen en_US.UTF-8 \
+    && dpkg-reconfigure locales \
+    && mkdir -p /.config \
+    && mkdir -p $HOME/workdir/data \
+    && mkdir -p $HOME/workdir/notebooks \
+    && mkdir -p /.config/supervisord \
+    && chmod +x /start.sh \
+    && chmod +x /usr/local/bin/start-notebook.sh \
+    && \
+##############################################################################
+# Install Miniconda dependencies
+##############################################################################
+    wget --quiet https://repo.anaconda.com/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh \
+    && /bin/bash ${PYTHON3_VERSION}-latest-Linux-x86_64.sh -b -p ${CONDA_DIR} \
+    && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
+    && conda config --add channels defaults \
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels anaconda \
+    && pip install scif \
+    && conda update --all && conda clean -tipsy \
+    && /bin/bash -c "exec $SHELL -l" \
+    && /bin/bash -c "source $HOME/.bashrc"
+    
+##############################################################################
+# Install packages through Scif
+##############################################################################
+    
+EXPOSE 6000
+EXPOSE 8888
+VOLUME ["$HOME/workdir/data"]
