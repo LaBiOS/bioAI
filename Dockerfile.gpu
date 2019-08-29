@@ -64,12 +64,12 @@ RUN apt-get update \
     && mkdir -p $HOME/workdir/notebooks \
     && mkdir -p /.config/supervisord \
     && chmod +x /start.sh \
-    && chmod +x /usr/local/bin/start-notebook.sh
-    
+    && chmod +x /usr/local/bin/start-notebook.sh \
+    && \
 ##############################################################################
 # Install Miniconda dependencies
 ##############################################################################
-RUN wget --quiet https://repo.anaconda.com/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh \
+    wget --quiet https://repo.anaconda.com/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh \
     && /bin/bash ${PYTHON3_VERSION}-latest-Linux-x86_64.sh -b -p ${CONDA_DIR} \
     && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
     && conda config --add channels defaults \
@@ -83,6 +83,10 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/${PYTHON3_VERSION}-Linux-x8
     && conda update --all && conda clean -tipsy \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc"
+    
+##############################################################################
+# Install packages through Scif
+##############################################################################
     
 EXPOSE 6000
 EXPOSE 8888
