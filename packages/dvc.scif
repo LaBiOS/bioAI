@@ -1,0 +1,16 @@
+%appinstall DVC
+	pip install dvc
+  
+%apphelp DVC
+    dvc --help
+    
+%applabels rseqc
+    VERSION X.X.X
+    
+%apptest DVC
+    dvc --help
+	if [ $? -ne 0 ] ; then
+	   echo 1
+	else
+	   echo 0
+	fi
