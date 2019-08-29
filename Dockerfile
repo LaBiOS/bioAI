@@ -1,188 +1,99 @@
-FROM nvidia/cuda:8.0-devel
-LABEL maintainer "Fabiano Menegidio <fabiano.menegidio@biology.bio.br>"
+FROM ubuntu:18.04
+MAINTAINER Fabiano Menegidio <fabiano.menegidio@biology.bio.br>
 
+##############################################################################
 # Metadata
-LABEL base.image="biodeeplearn:latest"
+##############################################################################
+LABEL base.image="bioAI:latest"
 LABEL version="1"
-LABEL software="Chainer"
-LABEL software.version=""
 LABEL description=""
 LABEL website=""
 LABEL documentation=""
 
+##############################################################################
+# ADD config files
+##############################################################################
+ADD .config/start.sh /start.sh
+ADD .config/start-notebook.sh /usr/local/bin/
+ADD .config/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
+ADD .config/supervisord.conf /.config/
+ADD .config/bashrc/.bashrc $HOME/.bashrc
+ADD .config/bashrc/.bash_profile $HOME/.bash_profile
+
+##############################################################################
+# ENVs
+##############################################################################
 ENV DEBIAN_FRONTEND noninteractive
+ENV SHELL /bin/bash
+ENV HOME /root
+ENV CUDA_VERSION 10.0.130
+ENV CUDA_PKG_VERSION 10-0=$CUDA_VERSION-1
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+ENV NVIDIA_REQUIRE_CUDA "cuda>=10.0 brand=tesla,driver>=384,driver<385"
+ENV CUDA_PATH /usr/local/cuda/bin
+ENV CUDNN_VERSION 7.3.1.20
+ENV PYTHON3_VERSION miniconda3-latest
+ENV PYTHON2_VERSION miniconda2-latest
+ENV JUPYTER_TYPE notebook
+ENV JUPYTER_PORT 8888
+ENV CONDA_DIR $HOME/.$PYTHON3_VERSION/
 
-RUN rm -rf /var/lib/apt/lists/* \
-           /etc/apt/sources.list.d/cuda.list \
-           /etc/apt/sources.list.d/nvidia-ml.list \
+##############################################################################
+# Repositories
+##############################################################################
+ENV repconda https://repo.continuum.io/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh
+ENV repdvc https://dvc.org/deb/dvc.list
+ENV keynvidia https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+ENV repcuda https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64
+ENV repnvidia-ml https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64
+
+##############################################################################
+# Install base dependencies
+##############################################################################
+RUN apt-get update \
+    && LIBPNG="$(apt-cache depends libpng-dev | grep 'Depends: libpng' | awk '{print $2}')" \
+    && apt-get install -y --allow-unauthenticated \
+    --no-install-recommends bash git zip wget libssl1.0.0 \
+    ca-certificates locales mlocate debconf curl build-essential \
+    curl vim bzip2 sudo automake cmake sed grep x11-utils xvfb openssl \
+    libxtst6 libxcomposite1 $LIBPNG stunnel \
+    && wget ${repodvc} -O /etc/apt/sources.list.d/dvc.list \
     && apt-get update \
-    && apt-get install -y --no-install-recommends \
-           apt-utils \
-           build-essential \
-           ca-certificates \
-           wget \
-           git \
-           vim \
-           make \
-           libssl-dev \
-           libsqlite3-dev \
-           zlib1g-dev \
-           libbz2-dev \
-           libreadline-dev \
-           libatlas-base-dev \
-           libboost-all-dev \
-           libgflags-dev \
-           libgoogle-glog-dev \
-           libhdf5-serial-dev \
-           libleveldb-dev \
-           liblmdb-dev \
-           libprotobuf-dev \
-           libsnappy-dev \
-           protobuf-compiler \
-           graphviz \
-           openmpi-bin \
-           libjasper-dev \
-    && \           
-    
-# =================================
-# Install CMake
-# =================================
-    git clone --depth 10 https://github.com/Kitware/CMake ~/cmake \
-    && cd ~/cmake \
-    && ./bootstrap --prefix=/usr/local \
-    && make -j"$(nproc)" install \
-    && \
-
-# =================================
-# Install python3 and dependences
-# =================================
-    apt-get install -y --no-install-recommends \
-           python3-pip \
-           python3-dev \
-    && ln -s /usr/bin/python3 /usr/local/bin/python \
-    && pip3 --no-cache-dir install --upgrade \
-           pip \
-           setuptools \
-           numpy \
-           scipy \
-           pandas \
-           scikit-learn \
-           matplotlib \
-           Cython \
+    && apt-get clean && apt-get autoclean && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
+    && echo "LC_ALL=en_US.UTF-8" >> /etc/environment \
+    && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && echo "LANG=en_US.UTF-8" > /etc/locale.conf \
+    && locale-gen en_US.UTF-8 \
+    && dpkg-reconfigure locales \
+    && mkdir -p /.config \
+    && mkdir -p $HOME/workdir/data \
+    && mkdir -p $HOME/workdir/notebooks \
+    && mkdir -p /.config/supervisord \
+    && chmod +x /start.sh \
+    && chmod +x /usr/local/bin/start-notebook.sh \
     && \
     
-    ls /usr/local/lib/ && \
+##############################################################################
+# Install Miniconda dependencies
+##############################################################################
+    wget --quiet ${repconda} \
+    && /bin/bash Miniconda2-latest-Linux-x86_64.sh -b -p ${CONDA_DIR} \
+    && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
+    && conda config --add channels defaults \
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels anaconda \
+    && conda config --add channels toli \
+    && conda config --add channels gregvonkuster \
+    && conda config --add channels hcc \
+    && pip install scif \
+    && conda update --all && conda clean -tipsy \
+    && /bin/bash -c "exec $SHELL -l" \
+    && /bin/bash -c "source $HOME/.bashrc"
 
-# =================================
-# Install Caffe
-# =================================
-    git clone --depth 10 https://github.com/NVIDIA/nccl \
-    && cd nccl; make -j"$(nproc)" install; cd ..; rm -rf nccl \
-    && git clone --depth 10 https://github.com/BVLC/caffe ~/caffe \
-    && mkdir ~/caffe/build && cd ~/caffe/build \
-    && cmake -D CMAKE_BUILD_TYPE=RELEASE \
-           -D CMAKE_INSTALL_PREFIX=/usr/local \
-           -D USE_CUDNN=1 \
-           -D USE_NCCL=1 \
-           -D python_version=3 \
-           -D CUDA_NVCC_FLAGS=--Wno-deprecated-gpu-targets \
-           -Wno-dev .. \
-    && make -j"$(nproc)" install \
-    && sed -i 's/,<2//g' ~/caffe/python/requirements.txt \
-    && pip3 --no-cache-dir install --upgrade \
-           -r ~/caffe/python/requirements.txt \
-    && mv /usr/local/python/caffe /usr/local/lib/python3.5/dist-packages/ \
-    && rm -rf /usr/local/python \
-
-# =================================
-# Install Chainer
-# =================================
-    pip3 --no-cache-dir install --upgrade \
-           cupy \
-           chainer \
-    && \
-
-# =================================
-# Install Keras
-# =================================
-    pip3 --no-cache-dir install --upgrade \
-           h5py \
-           keras \
-    && \
     
-# =================================
-# Install Lasagne
-# =================================
-    git clone --depth 10 https://github.com/Lasagne/Lasagne ~/lasagne \
-    && cd ~/lasagne \
-    && pip3 --no-cache-dir install --upgrade . \
-    && \    
-
-# =================================
-# Install Microsoft Cognitive Toolkit (CNTK)
-# =================================
-    pip3 --no-cache-dir install --upgrade \
-           https://cntk.ai/PythonWheel/GPU/cntk-2.2-cp36-cp36m-linux_x86_64.whl \
-    && \
-
-# =================================
-# Intall MXNet
-# =================================
-    pip3 --no-cache-dir install --upgrade \
-           mxnet-cu80 \
-           graphviz \
-    && \
-
-# =================================
-# Install OpenCV
-# =================================   
-    git clone --depth 10 https://github.com/opencv/opencv ~/opencv \
-    && mkdir -p ~/opencv/build && cd ~/opencv/build \
-    && cmake -D CMAKE_BUILD_TYPE=RELEASE \
-           -D CMAKE_INSTALL_PREFIX=/usr/local \
-           -D WITH_IPP=OFF \
-           -D WITH_CUDA=OFF \
-           -D WITH_OPENCL=OFF \
-           -D BUILD_TESTS=OFF \
-           -D BUILD_PERF_TESTS=OFF .. \
-    && make -j"$(nproc)" install \
-    && \
-
-# =================================
-# Install pyTorch
-# =================================
-    pip3 --no-cache-dir install --upgrade \
-           http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp36-cp36m-manylinux1_x86_64.whl \
-           torchvision \
-    && \
-
-# =================================
-# Install Sonnet
-# =================================
-    pip3 --no-cache-dir install --upgrade \
-           dm-sonnet \
-    && \
-
-# =================================
-# Install Tensorflow
-# =================================
-    pip3 --no-cache-dir install --upgrade \
-           tensorflow_gpu \
-    && \
-    
-# =================================
-# Install Theano
-# =================================
-    git clone --depth 10 https://github.com/Theano/Theano ~/theano \
-    && cd ~/theano \
-    && pip3 --no-cache-dir install . \
-    && git clone --depth 10 https://github.com/Theano/libgpuarray ~/gpuarray \
-    && mkdir -p ~/gpuarray/build && cd ~/gpuarray/build \
-    && cmake -D CMAKE_BUILD_TYPE=RELEASE \
-             -D CMAKE_INSTALL_PREFIX=/usr/local .. \
-    && make -j"$(nproc)" install \
-    && cd ~/gpuarray \
-    && python setup.py build \
-    && python setup.py install \
-    && printf '[global]\nfloatX = float32\ndevice = cuda0\n\n[dnn]\ninclude_path = /usr/local/cuda/targets/x86_64-linux/include\n' \
-    > ~/.theanorc
+EXPOSE 6000
+EXPOSE 8888
+VOLUME ["$HOME/workdir/data"]
