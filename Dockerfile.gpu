@@ -39,6 +39,7 @@ ENV PYTHON2_VERSION Miniconda2-latest
 ENV JUPYTER_TYPE notebook
 ENV JUPYTER_PORT 8888
 ENV CONDA_DIR $HOME/.conda
+ENV PATH $CONDA_DIR:$CONDA_DIR/bin:$SCIENV_ROOT/envs:$PYENV:$PATH
 
 ##############################################################################
 # Install base dependencies
