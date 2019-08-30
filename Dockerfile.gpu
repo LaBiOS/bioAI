@@ -23,6 +23,8 @@ ADD packages/dvc.scif /root/.packages/
 ADD packages/cuda.scif /root/.packages/
 ADD packages/cdnn.scif /root/.packages/
 ADD packages/jupyter.scif /root/.packages/
+ADD packages/python.scif /root/.packages/
+ADD packages/pythonML.scif /root/.packages/
 
 ##############################################################################
 # ENVs
