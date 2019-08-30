@@ -81,7 +81,7 @@ RUN apt-get update \
     && conda config --add channels conda-forge \
     && conda config --add channels bioconda \
     && conda config --add channels anaconda \
-    && pip install scif \
+    && pip --no-cache-dir install scif \
     && conda update --all && conda clean -tipsy \
     && \
 ##############################################################################
