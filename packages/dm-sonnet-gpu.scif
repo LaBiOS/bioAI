@@ -1,0 +1,4 @@
+%appinstall dm-sonnet-gpu
+
+conda install -y dm-sonnet-gpu
+conda clean -tipsy
