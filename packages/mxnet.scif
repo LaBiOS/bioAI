@@ -1,0 +1,4 @@
+%appinstall mxnet
+
+conda install -y mxnet
+conda clean -tipsy
