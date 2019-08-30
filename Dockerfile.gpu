@@ -29,8 +29,18 @@ ADD packages/cdnn.scif /root/.packages/
 ADD packages/jupyter.scif /root/.packages/
 ADD packages/python.scif /root/.packages/
 ADD packages/pythonML.scif /root/.packages/
-ADD packages/tensorflow.scif /root/.packages/
-ADD packages/keras.scif /root/.packages/
+ADD packages/tensorflow-gpu.scif /root/.packages/
+ADD packages/keras-gpu.scif /root/.packages/
+ADD packages/lasagne.scif /root/.packages/
+ADD packages/darknet.scif /root/.packages/
+ADD packages/pytorch-gpu.scif /root/.packages/
+ADD packages/theano.scif /root/.packages/
+ADD packages/opencv.scif /root/.packages/
+ADD packages/chainer.scif /root/.packages/
+ADD packages/mxnet.scif /root/.packages/
+ADD packages/onnx.scif /root/.packages/
+ADD packages/dm-sonnet-gpu.scif /root/.packages/
+ADD packages/caffe.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -101,8 +111,18 @@ RUN apt-get update \
     && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/python.scif \
     && scif install $HOME/.packages/pythonML.scif \
-    && scif install $HOME/.packages/tensorflow.scif \
-    && scif install $HOME/.packages/keras.scif
+    && scif install $HOME/.packages/tensorflow-gpu.scif \
+    && scif install $HOME/.packages/keras-gpu.scif \
+    && scif install $HOME/.packages/lasagne.scif \
+    && scif install $HOME/.packages/darknet.scif \
+    && scif install $HOME/.packages/pytorch-gpu.scif \
+    && scif install $HOME/.packages/theano.scif \
+    && scif install $HOME/.packages/opencv.scif \
+    && scif install $HOME/.packages/chainer.scif \
+    && scif install $HOME/.packages/mxnet.scif \
+    && scif install $HOME/.packages/onnx.scif \
+    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
+    && scif install $HOME/.packages/caffe.scif 
     
 
     
