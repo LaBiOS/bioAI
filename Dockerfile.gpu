@@ -19,12 +19,18 @@ ADD .config/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
 ADD .config/supervisord.conf /.config/
 ADD .config/bashrc/.bashrc $HOME/.bashrc
 ADD .config/bashrc/.bash_profile $HOME/.bash_profile
+
+##############################################################################
+# ADD packages files
+##############################################################################
 ADD packages/dvc.scif /root/.packages/
 ADD packages/cuda.scif /root/.packages/
 ADD packages/cdnn.scif /root/.packages/
 ADD packages/jupyter.scif /root/.packages/
 ADD packages/python.scif /root/.packages/
 ADD packages/pythonML.scif /root/.packages/
+ADD packages/tensorflow.scif /root/.packages/
+ADD packages/keras.scif /root/.packages/
 
 ##############################################################################
 # ENVs
