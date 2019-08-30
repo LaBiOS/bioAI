@@ -1,0 +1,4 @@
+%appinstall Tensorflow
+
+conda install -y tensorflow-gpu
+conda clean -tipsy
