@@ -4,7 +4,7 @@ MAINTAINER Fabiano Menegidio <fabiano.menegidio@biology.bio.br>
 ##############################################################################
 # Metadata
 ##############################################################################
-LABEL base.image="bioAI:gpu"
+LABEL base.image="bioAI:cpu"
 LABEL version="1"
 LABEL description=""
 LABEL website=""
@@ -21,9 +21,20 @@ ADD .config/bashrc/.bashrc $HOME/.bashrc
 ADD .config/bashrc/.bash_profile $HOME/.bash_profile
 
 ##############################################################################
+# ADD packages files
+##############################################################################
+ADD packages/dvc.scif /root/.packages/
+ADD packages/cuda.scif /root/.packages/
+ADD packages/cdnn.scif /root/.packages/
+ADD packages/jupyter.scif /root/.packages/
+ADD packages/python.scif /root/.packages/
+ADD packages/pythonML.scif /root/.packages/
+ADD packages/tensorflow.scif /root/.packages/
+ADD packages/keras.scif /root/.packages/
+
+##############################################################################
 # ENVs
 ##############################################################################
-ARG DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 ENV SHELL /bin/bash
 ENV HOME /root
@@ -68,15 +79,23 @@ RUN apt-get update \
     && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc" \
-    && ~/.conda/bin/conda config --add channels conda-forge \
-    && ~/.conda/bin/conda config --add channels bioconda \
-    && ~/.conda/bin/conda config --add channels anaconda \
-    && pip install scif \
-    && ~/.conda/bin/conda update --all && ~/.conda/bin/conda clean -tipsy
-    
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels anaconda \
+    && pip --no-cache-dir install scif \
+    && conda update --all && conda clean -tipsy \
+    && \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
+    scif install $HOME/.packages/dvc.scif \
+    && scif install $HOME/.packages/jupyter.scif \
+    && scif install $HOME/.packages/python.scif \
+    && scif install $HOME/.packages/pythonML.scif \
+    && scif install $HOME/.packages/tensorflow.scif \
+    && scif install $HOME/.packages/keras.scif
+    
+
     
 EXPOSE 6000
 EXPOSE 8888
