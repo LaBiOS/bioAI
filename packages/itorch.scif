@@ -1,5 +1,4 @@
 %appinstall iTorch
 
-git clone https://github.com/facebook/iTorch.git
-cd iTorch
-luarocks make
+conda install -c alexbw lua-itorch -y
+conda clean -tipsy
