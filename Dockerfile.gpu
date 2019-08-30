@@ -41,6 +41,8 @@ ADD packages/mxnet.scif /root/.packages/
 ADD packages/onnx.scif /root/.packages/
 ADD packages/dm-sonnet-gpu.scif /root/.packages/
 ADD packages/caffe.scif /root/.packages/
+ADD packages/itorch.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
@@ -122,7 +124,7 @@ RUN apt-get update \
     && scif install $HOME/.packages/mxnet.scif \
     && scif install $HOME/.packages/onnx.scif \
     && scif install $HOME/.packages/dm-sonnet-gpu.scif \
-    && scif install $HOME/.packages/caffe.scif 
+    && scif install $HOME/.packages/caffe.scif
     
 
     
