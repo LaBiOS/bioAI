@@ -100,7 +100,10 @@ RUN apt-get update \
     && scif install $HOME/.packages/cdnn.scif \
     && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/python.scif \
-    && scif install $HOME/.packages/pythonML.scif
+    && scif install $HOME/.packages/pythonML.scif \
+    && scif install $HOME/.packages/tensorflow.scif \
+    && scif install $HOME/.packages/keras.scif
+    
 
     
 EXPOSE 6000
