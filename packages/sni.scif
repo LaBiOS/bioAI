@@ -1,3 +1,0 @@
-%appinstall SNI Python
-
-pip --no-cache-dir install pyopenssl ndg-httpsclient pyasn1

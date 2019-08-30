@@ -1,0 +1,3 @@
+%appinstall Python Packages
+
+pip --no-cache-dir install pyopenssl ndg-httpsclient pyasn1 Cython path.py Pillow pygments six sphinx wheel zmq cloudpickle
