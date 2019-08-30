@@ -1,0 +1,4 @@
+%appinstall theano
+
+conda install -y theano
+conda clean -tipsy
