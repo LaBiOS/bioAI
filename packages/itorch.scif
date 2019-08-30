@@ -1,0 +1,5 @@
+%appinstall iTorch
+
+git clone https://github.com/facebook/iTorch.git
+cd iTorch
+luarocks make
