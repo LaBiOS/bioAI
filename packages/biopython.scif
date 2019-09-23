@@ -1,0 +1,4 @@
+%appinstall biopython
+
+conda install -y biopython
+conda clean -tipsy
