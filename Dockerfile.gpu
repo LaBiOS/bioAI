@@ -42,6 +42,7 @@ ADD packages/onnx.scif /root/.packages/
 ADD packages/dm-sonnet-gpu.scif /root/.packages/
 ADD packages/caffe.scif /root/.packages/
 ADD packages/itorch.scif /root/.packages/
+ADD packages/mlflow.scif /root/.packages/
 
 
 ##############################################################################
@@ -125,9 +126,8 @@ RUN apt-get update \
     && scif install $HOME/.packages/onnx.scif \
     && scif install $HOME/.packages/dm-sonnet-gpu.scif \
     && scif install $HOME/.packages/caffe.scif \
-    && scif install $HOME/.packages/itorch.scif
-    
-
+    && scif install $HOME/.packages/itorch.scif \
+    && scif install $HOME/.packages/mlflow.scif
     
 EXPOSE 6000
 EXPOSE 8888
