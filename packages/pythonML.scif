@@ -1,4 +1,4 @@
 %appinstall Python ML
 
-conda install -y numpy scipy nose h5py scikit-image matplotlib pandas scikit-learn sympy
+conda install -y numpy scipy nose h5py matplotlib pandas sympy
 conda clean -tipsy
