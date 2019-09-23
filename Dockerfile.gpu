@@ -120,17 +120,6 @@ RUN apt-get update \
     && scif install $HOME/.packages/pythonML.scif \
     && scif install $HOME/.packages/tensorflow-gpu.scif \
     && scif install $HOME/.packages/keras-gpu.scif \
-    && scif install $HOME/.packages/lasagne.scif \
-    && scif install $HOME/.packages/darknet.scif \
-    && scif install $HOME/.packages/pytorch-gpu.scif \
-    && scif install $HOME/.packages/theano.scif \
-    && scif install $HOME/.packages/opencv.scif \
-    && scif install $HOME/.packages/chainer.scif \
-    && scif install $HOME/.packages/mxnet.scif \
-    && scif install $HOME/.packages/onnx.scif \
-    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
-    && scif install $HOME/.packages/caffe.scif \
-    && scif install $HOME/.packages/itorch.scif \
     && scif install $HOME/.packages/mlflow.scif \
     && scif install $HOME/.packages/mlvtools.scif \
     && scif install $HOME/.packages/scikitbio.scif \
