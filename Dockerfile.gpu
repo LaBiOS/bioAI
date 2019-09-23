@@ -44,6 +44,7 @@ ADD packages/caffe.scif /root/.packages/
 ADD packages/itorch.scif /root/.packages/
 ADD packages/mlflow.scif /root/.packages/
 ADD packages/mlvtools.scif /root/.packages/
+ADD packages/scikit.scif /root/.packages/
 ADD packages/scikitbio.scif /root/.packages/
 ADD packages/biopython.scif /root/.packages/
 
@@ -123,6 +124,7 @@ RUN apt-get update \
     && scif install $HOME/.packages/mlflow.scif \
     && scif install $HOME/.packages/mlvtools.scif \
     && scif install $HOME/.packages/scikitbio.scif \
+    && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif
     
 EXPOSE 6000
