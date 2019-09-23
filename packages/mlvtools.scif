@@ -1,0 +1,3 @@
+%appinstall mlv-tools
+
+pip install ml-versioning-tools
