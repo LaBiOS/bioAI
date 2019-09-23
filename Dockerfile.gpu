@@ -129,7 +129,7 @@ RUN apt-get update \
     && scif install $HOME/.packages/caffe.scif \
     && scif install $HOME/.packages/itorch.scif \
     && scif install $HOME/.packages/mlflow.scif \
-     && scif install $HOME/.packages/mlvtools.scif
+    && scif install $HOME/.packages/mlvtools.scif
     
 EXPOSE 6000
 EXPOSE 8888
