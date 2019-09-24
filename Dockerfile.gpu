@@ -48,8 +48,7 @@ ADD packages/scikit.scif /root/.packages/
 ADD packages/scikitbio.scif /root/.packages/
 ADD packages/biopython.scif /root/.packages/
 ADD packages/dask.scif /root/.packages/
-
-
+ADD packages/libsvm.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -138,7 +137,8 @@ RUN apt-get update \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/dask.scif \
-    && scif install $HOME/.packages/biopython.scif
+    && scif install $HOME/.packages/biopython.scif \
+    && scif install $HOME/.packages/libsvm.scif
     
 EXPOSE 6000
 EXPOSE 8888
