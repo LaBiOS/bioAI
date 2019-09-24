@@ -6,5 +6,5 @@ echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x8
 echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
 apt-get update && apt-get install -y --allow-unauthenticated --no-install-recommends cuda-cudart-$CUDA_PKG_VERSION
 ln -s cuda-10.0 /usr/local/cuda
-apt-get clean && apt-get autoclean \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
+apt-get clean && apt-get autoclean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
