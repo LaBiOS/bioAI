@@ -50,6 +50,8 @@ ADD packages/biopython.scif /root/.packages/
 ADD packages/dask.scif /root/.packages/
 ADD packages/libsvm.scif /root/.packages/
 ADD packages/supervisord.scif /root/.packages/
+ADD packages/libs.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
@@ -185,6 +187,10 @@ RUN apt-get update \
     && pip --no-cache-dir install scif \
     && conda update --all && conda clean -tipsy \
     && pyenv deactivate \
+    && pyenv activate $PYTHON2_VERSION \
+    && pip --no-cache-dir install scif \
+    && conda update --all && conda clean -tipsy \
+    && pyenv deactivate \
     && \
 ##############################################################################
 # Install packages through Scif
@@ -203,12 +209,14 @@ RUN apt-get update \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
+    && scif install $HOME/.packages/libs.scif \
     && pyenv deactivate \
     && pyenv activate $PYTHON2_VERSION \
     && scif install $HOME/.packages/supervisord.scif \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
+    && scif install $HOME/.packages/libs.scif \
     && pyenv deactivate
     
 EXPOSE 6000
