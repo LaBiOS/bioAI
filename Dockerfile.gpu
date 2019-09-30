@@ -69,7 +69,16 @@ ENV PYTHON2_VERSION Miniconda2-latest
 ENV JUPYTER_TYPE notebook
 ENV JUPYTER_PORT 8888
 ENV CONDA_DIR $HOME/.conda
-ENV PATH $CONDA_DIR:$CONDA_DIR/bin:$SCIENV_ROOT/envs:$PYENV:$PATH
+ENV SCIENV_ROOT $HOME/.scienv
+ENV PYENV_ROOT $SCIENV_ROOT/envs/pyenv
+ENV PYENV $PYENV_ROOT/bin:$PYENV_ROOT/shims:$PYENV_ROOT/envs:$PYENV_ROOT/plugins
+ENV PYTHON-BUILD $PYENV_ROOT/plugins/python-build/bin
+ENV PYENV-DOCTOR $PYENV_ROOT/plugins/pyenv-doctor/bin
+ENV PYENV-INSTALLER $PYENV_ROOT/plugins/pyenv-installer/bin
+ENV PYENV-UPDATE $PYENV_ROOT/plugins/pyenv-update/bin
+ENV PYENV-VIRTUALENV $PYENV_ROOT/plugins/pyenv-virtualenv/bin
+ENV PYENV-WHICH-EXT $PYENV_ROOT/plugins/pyenv-which-ext/bin
+ENV PATH $CONDA_DIR:$CONDA_DIR/bin:$SCIENV_ROOT/bin:$SCIENV_ROOT/envs:$PYENV:$PATH
 
 ##############################################################################
 # Install base dependencies
@@ -98,23 +107,89 @@ RUN apt-get update \
     && chmod +x /usr/local/bin/start-notebook.sh \
     && \
 ##############################################################################
-# Install Miniconda dependencies
+# Install Scienv dependencies
+##############################################################################    
+    git clone https://github.com/LaBiOS/scienv.git $HOME/.scienv \
+    && echo 'export HOME="$HOME"' >> $HOME/.bash_profile \
+    && echo 'export PATH="$HOME/.scienv/bin:$HOME/.scienv/envs:$PATH"' \
+    >> $HOME/.bash_profile \
+    && echo 'export SCIENV_ROOT="$HOME/.scienv"' >> $HOME/.bash_profile \
+    && echo 'eval "$(scienv init -)"' >> $HOME/.bash_profile \
+    && echo 'export HOME="$HOME"' >> $HOME/.bashrc \
+    && echo 'export PATH="$HOME/.scienv/bin:$HOME/.scienv/envs:$PATH"' \
+    >> $HOME/.bashrc \
+    && echo 'export SCIENV_ROOT="$HOME/.scienv"' >> $HOME/.bashrc \
+    && echo 'eval "$(scienv init -)"' >> $HOME/.bashrc \ 
+    && export PATH="$HOME/.scienv/bin:$HOME/.scienv/envs:$PATH" \
+    && eval "$($HOME/.scienv/bin/scienv init -)" \
+    && /bin/bash -c "exec $SHELL -l" \
+    && chown -R $USER:$USER $HOME \
+    && \
 ##############################################################################
-    wget --quiet https://repo.anaconda.com/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh \
-    && /bin/bash ${PYTHON3_VERSION}-Linux-x86_64.sh -b -p ${CONDA_DIR} \
-    && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
+# Install Miniconda dependencies
+##############################################################################    
+    scienv install pyenv \
+    && echo 'eval "$(pyenv init -)"' >> $HOME/.bash_profile \
+    && echo 'eval "$(pyenv virtualenv-init -)"' >> $HOME/.bash_profile \
+    && echo 'export PYENV_VIRTUALENV_DISABLE_PROMPT=1' >> $HOME/.bash_profile \
+    && echo 'export PYENV_ROOT="$HOME/.scienv/envs/pyenv"' >> $HOME/.bash_profile \
+    && echo 'eval "$(pyenv init -)"' >> $HOME/.bashrc \
+    && echo 'eval "$(pyenv virtualenv-init -)"' >> $HOME/.bashrc \
+    && echo 'export PYENV_VIRTUALENV_DISABLE_PROMPT=1' >> $HOME/.bashrc \
+    && echo 'export PYENV_ROOT="$HOME/.scienv/envs/pyenv"' >> $HOME/.bashrc \
+    && eval "$($PYENV_ROOT/bin/pyenv init -)" \
+    && eval "$($PYENV_ROOT/bin/pyenv virtualenv-init -)" \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc" \
+    && /bin/bash -c "source $HOME/.bash_profile" \
+    && /bin/bash -c "source $PYENV_ROOT/completions/pyenv.bash" \
+    && chown -R $USER:$USER $HOME \
+    && eval "$(pyenv init -)" \
+    && eval "$(pyenv virtualenv-init -)" \
+    && \
+##############################################################################
+# Install Miniconda dependencies
+##############################################################################
+    pyenv install $PYTHON3_VERSION \
+    && pyenv rehash \
+    && pyenv activate $PYTHON3_VERSION \
+    && conda config --add channels defaults \
     && conda config --add channels conda-forge \
     && conda config --add channels bioconda \
-    && conda config --add channels anaconda \
+    && conda config --add channels biobuilds \
+    && conda update --all && conda clean -tipsy \
+    && pyenv deactivate \
+    && chown -R $USER:$USER $HOME \
+    && eval "$(pyenv init -)" \
+    && eval "$(pyenv virtualenv-init -)" \
+    && pyenv install $PYTHON2_VERSION \
+    && pyenv rehash \
+    && pyenv activate $PYTHON2_VERSION \
+    && conda config --add channels defaults \
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels biobuilds \
+    && conda update --all && conda clean -tipsy \
+    && pyenv deactivate \
+    && pyenv global $PYTHON3_VERSION $PYTHON2_VERSION \
+    && pyenv rehash \
+    && pyenv deactivate \
+    && ipython profile create \
+    && curl -L http://hbn.link/hb-ipython-startup-script > \
+        ~/.ipython/profile_default/startup/00-venv-sitepackages.py \
+    && \
+##############################################################################
+# Install Scif
+##############################################################################   
+    pyenv activate $PYTHON3_VERSION \
     && pip --no-cache-dir install scif \
     && conda update --all && conda clean -tipsy \
+    && pyenv deactivate \
     && \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    scif install $HOME/.packages/supervisord.scif \
+    pyenv activate $PYTHON3_VERSION \
     && scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
@@ -127,7 +202,14 @@ RUN apt-get update \
     && scif install $HOME/.packages/mlvtools.scif \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
-    && scif install $HOME/.packages/biopython.scif
+    && scif install $HOME/.packages/biopython.scif \
+    && pyenv deactivate \
+    && pyenv activate $PYTHON2_VERSION \
+    && scif install $HOME/.packages/supervisord.scif \
+    && scif install $HOME/.packages/scikitbio.scif \
+    && scif install $HOME/.packages/scikit.scif \
+    && scif install $HOME/.packages/biopython.scif \
+    && pyenv deactivate
     
 EXPOSE 6000
 EXPOSE 8888
