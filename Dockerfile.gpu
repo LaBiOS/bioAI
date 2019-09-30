@@ -130,7 +130,7 @@ RUN apt-get update \
     && chown -R $USER:$USER $HOME \
     && \
 ##############################################################################
-# Install Miniconda dependencies
+# Install Pyenv dependencies
 ##############################################################################    
     scienv install pyenv \
     && echo 'eval "$(pyenv init -)"' >> $HOME/.bash_profile \
