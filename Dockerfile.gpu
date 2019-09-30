@@ -49,6 +49,7 @@ ADD packages/scikitbio.scif /root/.packages/
 ADD packages/biopython.scif /root/.packages/
 ADD packages/dask.scif /root/.packages/
 ADD packages/libsvm.scif /root/.packages/
+ADD packages/supervisord.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -113,7 +114,8 @@ RUN apt-get update \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    scif install $HOME/.packages/dvc.scif \
+    scif install $HOME/.packages/supervisord.scif \
+    && scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
     && scif install $HOME/.packages/jupyter.scif \
