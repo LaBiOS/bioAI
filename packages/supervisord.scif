@@ -1,4 +1,3 @@
 %appinstall supervisord
 
-conda install -y supervisor
-conda clean -tipsy
+pip install supervisor superlance superslacker
