@@ -175,9 +175,6 @@ RUN apt-get update \
     && conda update --all && conda clean -tipsy \
     && pyenv deactivate \
     && pyenv global $PYTHON3_VERSION $PYTHON2_VERSION \
-    && ipython profile create \
-    && curl -L http://hbn.link/hb-ipython-startup-script > \
-        ~/.ipython/profile_default/startup/00-venv-sitepackages.py \
     && \
 ##############################################################################
 # Install Scif
