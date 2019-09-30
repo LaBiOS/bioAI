@@ -164,6 +164,7 @@ RUN apt-get update \
     && chown -R $USER:$USER $HOME \
     && eval "$(pyenv init -)" \
     && eval "$(pyenv virtualenv-init -)" \
+    && pyenv global $PYTHON3_VERSION \
     && pyenv install $PYTHON2_VERSION \
     && pyenv rehash \
     && pyenv activate $PYTHON2_VERSION \
@@ -174,8 +175,6 @@ RUN apt-get update \
     && conda update --all && conda clean -tipsy \
     && pyenv deactivate \
     && pyenv global $PYTHON3_VERSION $PYTHON2_VERSION \
-    && pyenv rehash \
-    && pyenv deactivate \
     && ipython profile create \
     && curl -L http://hbn.link/hb-ipython-startup-script > \
         ~/.ipython/profile_default/startup/00-venv-sitepackages.py \
