@@ -1,0 +1,4 @@
+%appinstall supervisord
+
+conda install -y supervisor
+conda clean -tipsy
