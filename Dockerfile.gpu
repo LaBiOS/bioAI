@@ -207,7 +207,6 @@ RUN apt-get update \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
-    && scif install $HOME/.packages/libs.scif \
     && pyenv deactivate \
     && pyenv activate $PYTHON2_VERSION \
     && scif install $HOME/.packages/supervisord.scif \
