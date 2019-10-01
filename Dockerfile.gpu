@@ -176,6 +176,7 @@ RUN apt-get update \
     && conda config --add channels biobuilds \
     && conda update --all && conda clean -tipsy \
     && pyenv deactivate \
+    && pyenv rehash \
     && pyenv global $PYTHON3_VERSION $PYTHON2_VERSION \
     && \
 ##############################################################################
@@ -189,12 +190,12 @@ RUN apt-get update \
     && pip --no-cache-dir install scif \
     && conda update --all && conda clean -tipsy \
     && pyenv deactivate \
+    && pyenv rehash \
     && \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    pyenv activate $PYTHON3_VERSION \
-    && scif install $HOME/.packages/dvc.scif \
+    scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
     && scif install $HOME/.packages/jupyter.scif \
@@ -207,7 +208,6 @@ RUN apt-get update \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
-    && pyenv deactivate \
     && pyenv activate $PYTHON2_VERSION \
     && scif install $HOME/.packages/supervisord.scif \
     && scif install $HOME/.packages/scikitbio.scif \
