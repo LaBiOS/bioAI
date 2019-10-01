@@ -1,4 +1,4 @@
-%appinstall libs
+%appinstall graphviz
 
-conda install -c anaconda graphviz 
+conda install -c bioconda py-graphviz
 conda clean -tipsy
