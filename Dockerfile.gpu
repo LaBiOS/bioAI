@@ -167,26 +167,11 @@ RUN apt-get update \
     && eval "$(pyenv init -)" \
     && eval "$(pyenv virtualenv-init -)" \
     && pyenv global $PYTHON3_VERSION \
-    && pyenv install $PYTHON2_VERSION \
-    && pyenv rehash \
-    && pyenv activate $PYTHON2_VERSION \
-    && conda config --add channels defaults \
-    && conda config --add channels conda-forge \
-    && conda config --add channels bioconda \
-    && conda config --add channels biobuilds \
-    && conda update --all && conda clean -tipsy \
-    && pyenv deactivate \
-    && pyenv rehash \
-    && pyenv global $PYTHON3_VERSION $PYTHON2_VERSION \
     && \
 ##############################################################################
 # Install Scif
 ##############################################################################   
     pyenv activate $PYTHON3_VERSION \
-    && pip --no-cache-dir install scif \
-    && conda update --all && conda clean -tipsy \
-    && pyenv deactivate \
-    && pyenv activate $PYTHON2_VERSION \
     && pip --no-cache-dir install scif \
     && conda update --all && conda clean -tipsy \
     && pyenv deactivate \
@@ -208,13 +193,7 @@ RUN apt-get update \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
-    && pyenv activate $PYTHON2_VERSION \
-    && scif install $HOME/.packages/supervisord.scif \
-    && scif install $HOME/.packages/scikitbio.scif \
-    && scif install $HOME/.packages/scikit.scif \
-    && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/libs.scif \
-    && scif install $HOME/.packages/ipython.scif \
     && /bin/bash -c "exec $SHELL -l"
     
 EXPOSE 6000
