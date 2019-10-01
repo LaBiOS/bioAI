@@ -215,7 +215,7 @@ RUN apt-get update \
     && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/libs.scif \
     && scif install $HOME/.packages/ipython.scif \
-    && pyenv deactivate
+    && /bin/bash -c "exec $SHELL -l"
     
 EXPOSE 6000
 EXPOSE 8888
