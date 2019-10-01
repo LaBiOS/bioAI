@@ -199,4 +199,4 @@ RUN apt-get update \
 EXPOSE 6000
 EXPOSE 8888
 VOLUME ["$HOME/workdir/data"]
-CMD ["/start.sh"]
+CMD ["/usr/local/bin/start-notebook.sh"]
