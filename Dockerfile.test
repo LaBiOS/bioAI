@@ -1,0 +1,158 @@
+ARG BASE_CONTAINER=jupyter/minimal-notebook
+FROM $BASE_CONTAINER
+LABEL maintainer="Fabiano Menegidio"
+
+##############################################################################
+# Metadata
+##############################################################################
+LABEL base.image="bioAI:gpu"
+LABEL version="1"
+LABEL description=""
+LABEL website=""
+LABEL documentation=""
+
+USER root
+
+##############################################################################
+# ENVs
+##############################################################################
+ENV DEBIAN_FRONTEND noninteractive
+ENV SHELL /bin/bash
+ENV HOME /root
+ENV CUDA_VERSION 10.0.130
+ENV CUDA_PKG_VERSION 10-0=$CUDA_VERSION-1
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+ENV NVIDIA_REQUIRE_CUDA "cuda>=10.0 brand=tesla,driver>=384,driver<385"
+ENV CUDA_PATH /usr/local/cuda/bin
+ENV CUDNN_VERSION 7.3.1.20
+
+##############################################################################
+# Install base dependencies
+##############################################################################
+RUN apt-get update \
+    && LIBPNG="$(apt-cache depends libpng-dev | grep 'Depends: libpng' | awk '{print $2}')" \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated \
+    --no-install-recommends bash git zip wget libssl1.0.0 apt-utils \
+    ca-certificates locales mlocate debconf curl build-essential ffmpeg \
+    curl vim bzip2 sudo automake cmake sed grep x11-utils xvfb openssl \
+    libxtst6 libxcomposite1 $LIBPNG stunnel \
+    && wget https://dvc.org/deb/dvc.list -O /etc/apt/sources.list.d/dvc.list \
+    && apt-get update \
+    && apt-get clean && apt-get autoclean && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
+    && echo "LC_ALL=en_US.UTF-8" >> /etc/environment \
+    && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && echo "LANG=en_US.UTF-8" > /etc/locale.conf \
+    && locale-gen en_US.UTF-8 \
+    && dpkg-reconfigure locales \
+    && mkdir -p /.config \
+    && mkdir -p $HOME/workdir/data \
+    && mkdir -p $HOME/workdir/notebooks
+    
+USER $NB_UID
+
+##############################################################################
+# Install Scif
+##############################################################################   
+RUN conda config --add channels defaults \
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels biobuilds \
+    && conda update --all && conda clean -tipsy\
+    && pip --no-cache-dir install scif \
+    && conda update --all && conda clean -tipsy
+    
+USER root
+
+##############################################################################
+# ADD packages files
+##############################################################################
+ADD packages/cuda.scif ~/.packages/
+ADD packages/cdnn.scif ~/.packages/
+
+##############################################################################
+# Install packages through Scif
+##############################################################################
+RUN scif install $HOME/.packages/cuda.scif \
+    && scif install $HOME/.packages/cdnn.scif \
+    && /bin/bash -c "exec $SHELL -l"
+
+USER $NB_UID
+    
+##############################################################################
+# ADD packages files
+##############################################################################
+ADD packages/dvc.scif ~/.packages/
+ADD packages/python.scif ~/.packages/
+ADD packages/pythonML.scif ~/.packages/
+ADD packages/tensorflow-gpu.scif ~/.packages/
+ADD packages/keras-gpu.scif ~/.packages/
+ADD packages/lasagne.scif ~/.packages/
+ADD packages/darknet.scif ~/.packages/
+ADD packages/pytorch-gpu.scif ~/.packages/
+ADD packages/theano.scif ~/.packages/
+ADD packages/opencv.scif ~/.packages/
+ADD packages/chainer.scif ~/.packages/
+ADD packages/mxnet.scif ~/.packages/
+ADD packages/onnx.scif ~/.packages/
+ADD packages/dm-sonnet-gpu.scif ~/.packages/
+ADD packages/caffe.scif ~/.packages/
+ADD packages/itorch.scif ~/.packages/
+ADD packages/mlflow.scif ~/.packages/
+ADD packages/mlvtools.scif ~/.packages/
+ADD packages/scikit.scif ~/.packages/
+ADD packages/scikitbio.scif ~/.packages/
+ADD packages/biopython.scif ~/.packages/
+ADD packages/dask.scif ~/.packages/
+ADD packages/libsvm.scif ~/.packages/
+ADD packages/libs.scif ~/.packages/
+
+##############################################################################
+# Install packages through Scif
+##############################################################################
+RUN scif install $HOME/.packages/dvc.scif \
+    && scif install $HOME/.packages/python.scif \
+    && scif install $HOME/.packages/pythonML.scif \
+    && scif install $HOME/.packages/tensorflow-gpu.scif \
+    && scif install $HOME/.packages/keras-gpu.scif \
+    && scif install $HOME/.packages/mlflow.scif \
+    && scif install $HOME/.packages/mlvtools.scif \
+    && scif install $HOME/.packages/scikitbio.scif \
+    && scif install $HOME/.packages/scikit.scif \
+    && scif install $HOME/.packages/biopython.scif \
+    && scif install $HOME/.packages/libs.scif \
+    && /bin/bash -c "exec $SHELL -l"
+    
+RUN conda clean --all -f -y && \
+    # Activate ipywidgets extension in the environment that runs the notebook server
+    jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
+    # Also activate ipywidgets extension for JupyterLab
+    # Check this URL for most recent compatibilities
+    # https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager@^1.0.1 --no-build && \
+    jupyter labextension install jupyterlab_bokeh@1.0.0 --no-build && \
+    jupyter lab build --dev-build=False && \
+    npm cache clean --force && \
+    rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
+    rm -rf /home/$NB_USER/.cache/yarn && \
+    rm -rf /home/$NB_USER/.node-gyp && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+
+# Install facets which does not have a pip or conda package at the moment
+RUN cd /tmp && \
+    git clone https://github.com/PAIR-code/facets.git && \
+    cd facets && \
+    jupyter nbextension install facets-dist/ --sys-prefix && \
+    cd && \
+    rm -rf /tmp/facets && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+
+# Import matplotlib the first time to build the font cache.
+ENV XDG_CACHE_HOME /home/$NB_USER/.cache/
+RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
+    fix-permissions /home/$NB_USER
+    
+USER $NB_UID
