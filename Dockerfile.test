@@ -48,7 +48,7 @@ RUN apt-get update \
     && dpkg-reconfigure locales \
     && mkdir -p /.config \
     && mkdir -p $HOME/workdir/data \
-    && mkdir -p $HOME/workdir/notebooks
+    && mkdir -p $HOME/workdir/notebooks \
     && conda config --add channels defaults \
     && conda config --add channels conda-forge \
     && conda config --add channels bioconda \
