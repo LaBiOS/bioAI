@@ -49,18 +49,18 @@ RUN apt-get update \
     && mkdir -p /.config \
     && mkdir -p $HOME/workdir/data \
     && mkdir -p $HOME/workdir/notebooks
+    && conda config --add channels defaults \
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels biobuilds \
+    && conda update --all && conda clean -tipsy
     
 USER $NB_UID
 
 ##############################################################################
 # Install Scif
 ##############################################################################   
-RUN conda config --add channels defaults \
-    && conda config --add channels conda-forge \
-    && conda config --add channels bioconda \
-    && conda config --add channels biobuilds \
-    && conda update --all && conda clean -tipsy\
-    && pip --no-cache-dir install scif \
+RUN pip --no-cache-dir install scif \
     && conda update --all && conda clean -tipsy
     
 USER root
