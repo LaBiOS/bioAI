@@ -1,0 +1,4 @@
+%appinstall git-annex
+
+conda install -y git-annex
+conda clean -tipsy
