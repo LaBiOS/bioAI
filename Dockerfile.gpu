@@ -66,11 +66,13 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 ENV NVIDIA_REQUIRE_CUDA "cuda>=10.0 brand=tesla,driver>=384,driver<385"
 ENV CUDA_PATH /usr/local/cuda/bin
 ENV CUDNN_VERSION 7.3.1.20
-ENV PYTHON3_VERSION miniconda3-latest
-ENV PYTHON2_VERSION miniconda2-latest
+ENV PYTHON3_VERSION Miniconda3-latest
+ENV PYTHON2_VERSION Miniconda2-latest
 ENV JUPYTER_TYPE notebook
 ENV JUPYTER_PORT 8888
 ENV CONDA_DIR $HOME/.conda
+ENV PATH $CONDA_DIR:$CONDA_DIR/bin:$PYENV:$PATH
+
 
 ##############################################################################
 # Install base dependencies
