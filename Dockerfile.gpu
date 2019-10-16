@@ -71,7 +71,7 @@ ENV PYTHON2_VERSION Miniconda2-latest
 ENV JUPYTER_TYPE notebook
 ENV JUPYTER_PORT 8888
 ENV CONDA_DIR $HOME/.conda
-ENV PATH $CONDA_DIR:$CONDA_DIR/bin:$PYENV:$PATH
+ENV PATH $CONDA_DIR:$CONDA_DIR/bin:$PATH
 
 
 ##############################################################################
@@ -111,17 +111,12 @@ RUN apt-get update \
     && conda config --add channels conda-forge \
     && conda config --add channels bioconda \
     && conda config --add channels anaconda \
-    && pip --no-cache-dir install scif \
-    && conda update --all && conda clean -tipsy \
     && \
 ##############################################################################
 # Install Scif
 ##############################################################################
-    pyenv activate $PYTHON3_VERSION \
-    && pip --no-cache-dir install scif \
-    && conda update --all && conda clean -tipsy \
-    && pyenv deactivate \
-    && pyenv rehash \
+    pip --no-cache-dir install scif \
+    && conda update --all && conda clean -tipsy \    
     && \
 ##############################################################################
 # Install packages through Scif
