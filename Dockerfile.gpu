@@ -49,9 +49,9 @@ ADD packages/scikitbio.scif /root/.packages/
 ADD packages/biopython.scif /root/.packages/
 ADD packages/dask.scif /root/.packages/
 ADD packages/libsvm.scif /root/.packages/
-ADD packages/supervisord.scif /root/.packages/
 ADD packages/libs.scif /root/.packages/
-ADD packages/ipython.scif /root/.packages/
+ADD packages/beautifulsoup.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
@@ -135,6 +135,20 @@ RUN apt-get update \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/libs.scif \
+    && scif install $HOME/.packages/beautifulsoup.scif \
+    && scif install $HOME/.packages/lasagne.scif \
+    && scif install $HOME/.packages/darknet.scif \
+    && scif install $HOME/.packages/pytorch-gpu.scif \
+    && scif install $HOME/.packages/theano.scif \
+    && scif install $HOME/.packages/opencv.scif \
+    && scif install $HOME/.packages/chainer.scif \
+    && scif install $HOME/.packages/mxnet.scif \
+    && scif install $HOME/.packages/onnx.scif \
+    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
+    && scif install $HOME/.packages/caffe.scif \
+    && scif install $HOME/.packages/itorch.scif \
+    && scif install $HOME/.packages/dask.scif \
+    && scif install $HOME/.packages/libsvm.scif \
     && /bin/bash -c "exec $SHELL -l"
 
 EXPOSE 6000
