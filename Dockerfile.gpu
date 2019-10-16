@@ -53,8 +53,6 @@ ADD packages/supervisord.scif /root/.packages/
 ADD packages/libs.scif /root/.packages/
 ADD packages/ipython.scif /root/.packages/
 
-
-
 ##############################################################################
 # ENVs
 ##############################################################################
