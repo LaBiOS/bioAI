@@ -1,9 +1,0 @@
-%appinstall ipython
-
-pip install ipykernel
-
-python -m ipykernel install --use
-
-ipython profile create
-
-curl -L http://hbn.link/hb-ipython-startup-script > ~/.ipython/profile_default/startup/00-venv-sitepackages.py
