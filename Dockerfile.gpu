@@ -100,20 +100,20 @@ RUN apt-get update \
     && chmod +x /start.sh \
     && chmod +x /usr/local/bin/start-notebook.sh \
     && \
-    ##############################################################################
-    # Install Miniconda dependencies
-    ##############################################################################
-        wget --quiet https://repo.anaconda.com/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh \
-        && /bin/bash ${PYTHON3_VERSION}-Linux-x86_64.sh -b -p ${CONDA_DIR} \
-        && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
-        && /bin/bash -c "exec $SHELL -l" \
-        && /bin/bash -c "source $HOME/.bashrc" \
-        && conda config --add channels conda-forge \
-        && conda config --add channels bioconda \
-        && conda config --add channels anaconda \
-        && pip --no-cache-dir install scif \
-        && conda update --all && conda clean -tipsy \
-        && \
+##############################################################################
+# Install Miniconda dependencies
+##############################################################################
+    wget --quiet https://repo.anaconda.com/miniconda/${PYTHON3_VERSION}-Linux-x86_64.sh \
+    && /bin/bash ${PYTHON3_VERSION}-Linux-x86_64.sh -b -p ${CONDA_DIR} \
+    && rm ${PYTHON3_VERSION}-Linux-x86_64.sh \
+    && /bin/bash -c "exec $SHELL -l" \
+    && /bin/bash -c "source $HOME/.bashrc" \
+    && conda config --add channels conda-forge \
+    && conda config --add channels bioconda \
+    && conda config --add channels anaconda \
+    && pip --no-cache-dir install scif \
+    && conda update --all && conda clean -tipsy \
+    && \
 ##############################################################################
 # Install Scif
 ##############################################################################
