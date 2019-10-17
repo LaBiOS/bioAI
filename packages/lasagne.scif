@@ -1,4 +1,4 @@
 %appinstall Lasagne
 
-conda create -n lasagne python=3.6 lasagne -y
-conda clean -tipsy
+conda install -c anaconda lasagne
+conda clean -tipy
