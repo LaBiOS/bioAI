@@ -82,7 +82,7 @@ RUN apt-get update \
     --no-install-recommends bash git zip wget libssl1.0.0 apt-utils \
     ca-certificates locales mlocate debconf curl build-essential \
     curl vim bzip2 sudo automake cmake sed grep x11-utils xvfb openssl \
-    libxtst6 libxcomposite1 $LIBPNG stunnel \
+    libxtst6 libxcomposite1 $LIBPNG stunnel swig \
     && wget https://dvc.org/deb/dvc.list -O /etc/apt/sources.list.d/dvc.list \
     && apt-get update \
     && apt-get clean && apt-get autoclean && apt-get autoremove \
