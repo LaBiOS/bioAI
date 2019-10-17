@@ -1,4 +1,4 @@
 %appinstall SciKit
 
 conda install -y scikit-image scikit-learn
-conda clean -tipsy
+conda clean -tipy
