@@ -15,8 +15,6 @@ LABEL documentation=""
 ##############################################################################
 ADD .config/start.sh /start.sh
 ADD .config/start-notebook.sh /usr/local/bin/
-ADD .config/jupyter.conf /etc/supervisor/conf.d/jupyter.conf
-ADD .config/supervisord.conf /.config/
 ADD .config/bashrc/.bashrc $HOME/.bashrc
 ADD .config/bashrc/.bash_profile $HOME/.bash_profile
 
@@ -96,7 +94,6 @@ RUN apt-get update \
     && mkdir -p /.config \
     && mkdir -p $HOME/workdir/data \
     && mkdir -p $HOME/workdir/notebooks \
-    && mkdir -p /.config/supervisord \
     && chmod +x /start.sh \
     && chmod +x /usr/local/bin/start-notebook.sh \
     && \
