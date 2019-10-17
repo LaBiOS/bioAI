@@ -1,4 +1,4 @@
 %appinstall libsvm
 
 conda install -y libsvm
-conda clean -tipsy
+conda clean -tipy
