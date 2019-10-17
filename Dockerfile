@@ -130,8 +130,7 @@ RUN apt-get update \
 # Install packages through Scif
 ##############################################################################
 RUN scif install $HOME/.packages/dvc.scif \
-    && \     
-    scif install $HOME/.packages/cuda.scif \
+    && scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
     && scif install $HOME/.packages/python.scif \
     && scif install $HOME/.packages/jupyter.scif \
