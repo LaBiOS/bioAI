@@ -38,7 +38,7 @@ ADD packages/chainer.scif /root/.packages/
 ADD packages/mxnet.scif /root/.packages/
 ADD packages/onnx.scif /root/.packages/
 ADD packages/caffe.scif /root/.packages/
-ADD packages/itorch.scif /root/.packages/
+ADD packages/torch.scif /root/.packages/
 ADD packages/mlflow.scif /root/.packages/
 ADD packages/mlvtools.scif /root/.packages/
 ADD packages/scikit.scif /root/.packages/
@@ -46,9 +46,10 @@ ADD packages/scikitbio.scif /root/.packages/
 ADD packages/biopython.scif /root/.packages/
 ADD packages/dask.scif /root/.packages/
 ADD packages/libsvm.scif /root/.packages/
-ADD packages/libs.scif /root/.packages/
+ADD packages/graphviz.scif /root/.packages/
 ADD packages/beautifulsoup.scif /root/.packages/
-
+ADD packages/dm-sonnet-gpu.scif /root/.packages/
+ADD packages/xgboost.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -110,6 +111,14 @@ RUN apt-get update \
     && conda config --add channels anaconda \
     && \
 ##############################################################################
+# Lasagne and dm-sonnet only work on Python <3.6 or Python <2.7.
+# So we decided to use Python 3.6 as the container default.
+# If you don't want to use these libraries, change your Python version to > 3.6.
+##############################################################################
+    conda create -n py36 python=3.6 -y
+    && conda activate py36 \
+    && \
+##############################################################################
 # Install Scif
 ##############################################################################
     pip --no-cache-dir install scif \
@@ -119,10 +128,11 @@ RUN apt-get update \
 # Install packages through Scif
 ##############################################################################
 RUN scif install $HOME/.packages/dvc.scif \
-    && scif install $HOME/.packages/cuda.scif \
+    && \     
+    scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
-    && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/python.scif \
+    && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/pythonML.scif \
     && scif install $HOME/.packages/tensorflow-gpu.scif \
     && scif install $HOME/.packages/keras-gpu.scif \
@@ -131,9 +141,8 @@ RUN scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
-    && scif install $HOME/.packages/libs.scif \
+    && scif install $HOME/.packages/graphviz.scif \
     && scif install $HOME/.packages/beautifulsoup.scif \
-    && scif install $HOME/.packages/lasagne.scif \
     && scif install $HOME/.packages/darknet.scif \
     && scif install $HOME/.packages/pytorch-gpu.scif \
     && scif install $HOME/.packages/theano.scif \
@@ -142,9 +151,12 @@ RUN scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/mxnet.scif \
     && scif install $HOME/.packages/onnx.scif \
     && scif install $HOME/.packages/caffe.scif \
-    && scif install $HOME/.packages/itorch.scif \
+    && scif install $HOME/.packages/torch.scif \
     && scif install $HOME/.packages/dask.scif \
     && scif install $HOME/.packages/libsvm.scif \
+    && scif install $HOME/.packages/lasagne.scif \
+    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
+    && scif install $HOME/.packages/xgboost.scif \
     && /bin/bash -c "exec $SHELL -l"
 
 EXPOSE 6000
