@@ -1,4 +1,4 @@
 %appinstall Python ML
 
 conda install -y numpy scipy nose h5py matplotlib pandas sympy numba
-conda clean -tipsy
+conda clean -tipy
