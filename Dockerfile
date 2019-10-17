@@ -4,9 +4,9 @@ MAINTAINER Fabiano Menegidio <fabiano.menegidio@biology.bio.br>
 ##############################################################################
 # Metadata
 ##############################################################################
-LABEL base.image="bioAI:gpu"
-LABEL version="1"
-LABEL description=""
+LABEL base.image="ubuntu:18.04"
+LABEL version="1.0"
+LABEL description="An all-in-one Docker image for Machine Learning and Deep Learning."
 LABEL website=""
 LABEL documentation=""
 
