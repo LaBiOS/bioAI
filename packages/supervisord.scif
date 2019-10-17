@@ -1,3 +1,0 @@
-%appinstall supervisord
-
-pip install supervisor superlance superslacker
