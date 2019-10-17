@@ -1,4 +1,4 @@
 %appinstall darknet
 
 conda install -c gregvonkuster darknet -y
-conda clean -tipsy
+conda clean -tipy
