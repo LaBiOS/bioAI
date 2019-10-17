@@ -1,4 +1,4 @@
 %appinstall mlflow
 
 conda install -y mlflow
-conda clean -tipsy
+conda clean -tipy
