@@ -1,0 +1,4 @@
+%appinstall xgboost
+
+conda install -y xgboost
+conda clean -tipy
