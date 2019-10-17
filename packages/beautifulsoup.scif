@@ -1,4 +1,4 @@
 %appinstall BeautifulSoup4
 
 conda install -y beautifulsoup4
-conda clean -tipsy
+conda clean -tipy
