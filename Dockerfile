@@ -37,7 +37,6 @@ ADD packages/opencv.scif /root/.packages/
 ADD packages/chainer.scif /root/.packages/
 ADD packages/mxnet.scif /root/.packages/
 ADD packages/onnx.scif /root/.packages/
-ADD packages/dm-sonnet-gpu.scif /root/.packages/
 ADD packages/caffe.scif /root/.packages/
 ADD packages/itorch.scif /root/.packages/
 ADD packages/mlflow.scif /root/.packages/
@@ -142,7 +141,6 @@ RUN scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/chainer.scif \
     && scif install $HOME/.packages/mxnet.scif \
     && scif install $HOME/.packages/onnx.scif \
-    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
     && scif install $HOME/.packages/caffe.scif \
     && scif install $HOME/.packages/itorch.scif \
     && scif install $HOME/.packages/dask.scif \
