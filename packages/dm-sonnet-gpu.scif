@@ -1,4 +1,7 @@
 %appinstall dm-sonnet-gpu
 
+conda create -n dm-sonnet-gpu python=3.6 -y
+conda activate dm-sonnet-gpu
 conda install -c hcc dm-sonnet-gpu -y
 conda clean -tipsy
+conda deactivate
