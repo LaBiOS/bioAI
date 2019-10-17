@@ -113,12 +113,12 @@ RUN apt-get update \
 # Install Scif
 ##############################################################################
     pip --no-cache-dir install scif \
-    && conda update --all && conda clean -tipsy \    
-    && \
+    && conda update --all && conda clean -tipsy
+    
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    scif install $HOME/.packages/dvc.scif \
+RUN scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
     && scif install $HOME/.packages/jupyter.scif \
