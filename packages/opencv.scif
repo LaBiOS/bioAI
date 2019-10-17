@@ -1,4 +1,4 @@
 %appinstall opencv
 
 conda install -y opencv
-conda clean -tipsy
+conda clean -tipy
