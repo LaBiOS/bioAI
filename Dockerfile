@@ -55,6 +55,7 @@ ADD packages/beautifulsoup.scif /root/.packages/
 # ENVs
 ##############################################################################
 ENV DEBIAN_FRONTEND noninteractive
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 ENV SHELL /bin/bash
 ENV HOME /root
 ENV CUDA_VERSION 10.0.130
