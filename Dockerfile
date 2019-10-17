@@ -114,7 +114,7 @@ RUN apt-get update \
 # Install Scif
 ##############################################################################
     pip --no-cache-dir install scif \
-    && conda update --all && conda build purge-all
+    && conda update --all && conda clean -tipsy
     
 ##############################################################################
 # Install packages through Scif
