@@ -1,5 +1,6 @@
 %appinstall SciKit
 
+pip install pyrfr ConfigSpace pynisher smac
 conda install -y gxx_linux-64 gcc_linux-64 swig scikit-image scikit-learn
 pip install auto-sklearn
 conda clean -tipsy
