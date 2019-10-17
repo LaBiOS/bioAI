@@ -1,4 +1,4 @@
 %appinstall caffe
 
 conda install -y caffe
-conda clean -tipsy
+conda clean -tipy
