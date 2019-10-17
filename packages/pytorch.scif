@@ -1,4 +1,0 @@
-%appinstall pytorch
-
-conda install -c anaconda pytorch-gpu -y
-conda clean -tipy

@@ -1,0 +1,4 @@
+%appinstall torch
+
+conda install -c alexbw lua-torch -y
+conda clean -tipy
