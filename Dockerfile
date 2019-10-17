@@ -118,7 +118,7 @@ RUN apt-get update \
 # If you don't want to use these libraries, change your Python version to > 3.6.
 ##############################################################################
     conda create -n py36 python=3.6 -y \
-    && conda activate py36 \
+    && source activate py36 \
     && \
 ##############################################################################
 # Install Scif
