@@ -1,4 +1,4 @@
 %appinstall chainer
 
 conda install -y chainer
-conda clean -tipsy
+conda clean -tipy
