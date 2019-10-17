@@ -1,4 +1,4 @@
 %appinstall dask
 
 conda install dask-core -y
-conda clean -tipsy
+conda clean -tipy
