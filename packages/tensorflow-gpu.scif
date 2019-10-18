@@ -1,3 +1,3 @@
 %appinstall Tensorflow
 
-python -m pip --no-cache-dir install --upgrade tensorflow tensorboard jupyter-tensorboard tensorflow_probability
+python -m pip --no-cache-dir install --upgrade tensorflow tensorboard tensorflow_probability
