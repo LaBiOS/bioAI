@@ -1,0 +1,3 @@
+%appinstall deap
+
+python -m pip --no-cache-dir install --upgrade deap
