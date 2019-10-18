@@ -1,0 +1,4 @@
+%appinstall shogun
+
+conda install -c conda-forge shogun
+conda clean -tipy
