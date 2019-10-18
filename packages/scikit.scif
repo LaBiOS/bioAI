@@ -1,3 +1,4 @@
 %appinstall SciKit
 
+curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install
 python -m pip --no-cache-dir install --upgrade scikit-learn scikit-image auto-sklearn scikit-bio
