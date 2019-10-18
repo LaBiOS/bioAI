@@ -1,8 +1,6 @@
 %appinstall Jupyter
 
-conda install setuptools jupyter jupyter_core jupyterlab nb_conda -y
-pip install bash_kernel jupyterlab-git
+conda install setuptools jupyter jupyter_core jupyterlab nb_conda jupyterlab-git bash_kernel -y
 python -m bash_kernel.install --user
-jupyter lab build
 jupyter serverextension enable --py jupyterlab --sys-prefix
 conda update --all && conda clean -tipy
