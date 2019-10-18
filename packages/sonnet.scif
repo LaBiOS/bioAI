@@ -1,3 +1,0 @@
-%appinstall sonnet
-
-python -m pip --no-cache-dir install --upgrade dm-sonnet
