@@ -52,6 +52,8 @@ ADD packages/dm-sonnet-gpu.scif /root/.packages/
 ADD packages/xgboost.scif /root/.packages/
 ADD packages/git-annex.scif /root/.packages/
 ADD packages/autosklearn.scif /root/.packages/
+ADD packages/torch.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
@@ -152,6 +154,7 @@ RUN pip --no-cache-dir install scif \
     && scif install $HOME/.packages/dask.scif \
     && scif install $HOME/.packages/libsvm.scif \
     && scif install $HOME/.packages/git-annex.scif \
+    && scif install $HOME/.packages/torch.scif \
     && scif install $HOME/.packages/autosklearn.scif
 
 EXPOSE 6000
