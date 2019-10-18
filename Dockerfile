@@ -111,6 +111,7 @@ RUN apt-get update \
     && conda config --add channels conda-forge \
     && conda config --add channels bioconda \
     && conda config --add channels anaconda \
+    && conda update --all && conda clean -tipy \
     && \
 ##############################################################################
 # Lasagne and dm-sonnet only work on Python <3.6 or Python <2.7.
@@ -125,7 +126,7 @@ RUN apt-get update \
 # Install Scif
 ##############################################################################
     pip --no-cache-dir install scif \
-    && conda update --all && conda clean -tipy
+    && conda clean -tipy
     
 ##############################################################################
 # Install packages through Scif
@@ -159,8 +160,7 @@ RUN scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/lasagne.scif \
     && scif install $HOME/.packages/dm-sonnet-gpu.scif \
     && scif install $HOME/.packages/xgboost.scif \
-    && scif install $HOME/.packages/git-annex.scif \
-    && /bin/bash -c "exec $SHELL -l"
+    && scif install $HOME/.packages/git-annex.scif
 
 EXPOSE 6000
 EXPOSE 8888
