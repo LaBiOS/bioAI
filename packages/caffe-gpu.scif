@@ -1,4 +1,4 @@
-%appinstall caffe
+%appinstall caffe-gpu
 
 conda install -c anaconda caffe-gpu -y
 conda clean -tipy
