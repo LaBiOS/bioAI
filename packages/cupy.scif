@@ -1,3 +1,4 @@
 %appinstall cupy
 
-python -m pip --no-cache-dir install --upgrade cupy
+conda install -c rapidsai cupy -y
+conda clean -tipy
