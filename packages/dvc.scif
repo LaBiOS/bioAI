@@ -1,5 +1,5 @@
 %appinstall DVC
-	pip install dvc
+	python -m pip --no-cache-dir install --upgrade dvc
   
 %apphelp DVC
     dvc --help
