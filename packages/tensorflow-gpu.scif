@@ -1,4 +1,3 @@
 %appinstall Tensorflow
 
-conda install -y tensorflow-gpu
-conda clean -tipy
+python -m pip --no-cache-dir install --upgrade tensorflow tensorboard jupyter-tensorboard
