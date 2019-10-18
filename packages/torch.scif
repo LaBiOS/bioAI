@@ -7,7 +7,6 @@ mkdir build
 cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_LUAJIT21=ON ..
 make -j"$(nproc)" install
-DEBIAN_FRONTEND=noninteractive apt-get install -y libjpeg-dev libpng-dev libreadline-dev
 git clone https://github.com/Yonaba/Moses ~/moses
 cd ~/moses
 luarocks install rockspec/moses-1.6.1-1.rockspec
