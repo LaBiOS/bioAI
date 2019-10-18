@@ -29,7 +29,7 @@ ADD packages/jupyter.scif /root/.packages/
 ADD packages/python.scif /root/.packages/
 ADD packages/pythonML.scif /root/.packages/
 ADD packages/tensorflow-gpu.scif /root/.packages/
-ADD packages/keras-gpu.scif /root/.packages/
+ADD packages/keras.scif /root/.packages/
 ADD packages/lasagne.scif /root/.packages/
 ADD packages/darknet.scif /root/.packages/
 ADD packages/pytorch-gpu.scif /root/.packages/
@@ -38,11 +38,11 @@ ADD packages/opencv.scif /root/.packages/
 ADD packages/chainer.scif /root/.packages/
 ADD packages/mxnet.scif /root/.packages/
 ADD packages/onnx.scif /root/.packages/
-ADD packages/caffe.scif /root/.packages/
+ADD packages/caffe-gpu.scif /root/.packages/
+ADD packages/caffe2-gpu.scif /root/.packages/
 ADD packages/mlflow.scif /root/.packages/
-ADD packages/mlvtools.scif /root/.packages/
+ADD packages/mlv-tools.scif /root/.packages/
 ADD packages/scikit.scif /root/.packages/
-ADD packages/scikitbio.scif /root/.packages/
 ADD packages/biopython.scif /root/.packages/
 ADD packages/dask.scif /root/.packages/
 ADD packages/libsvm.scif /root/.packages/
@@ -51,9 +51,10 @@ ADD packages/beautifulsoup.scif /root/.packages/
 ADD packages/dm-sonnet-gpu.scif /root/.packages/
 ADD packages/xgboost.scif /root/.packages/
 ADD packages/git-annex.scif /root/.packages/
-ADD packages/autosklearn.scif /root/.packages/
 ADD packages/torch.scif /root/.packages/
-
+ADD packages/cupy.scif /root/.packages/
+ADD packages/pydata.scif /root/.packages/
+ADD packages/cntk.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -141,21 +142,18 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
     && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/pythonML.scif \
     && scif install $HOME/.packages/tensorflow-gpu.scif \
-    && scif install $HOME/.packages/keras-gpu.scif \
+    && scif install $HOME/.packages/keras.scif \
     && scif install $HOME/.packages/mlflow.scif \
     && scif install $HOME/.packages/mlvtools.scif \
-    && scif install $HOME/.packages/scikitbio.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/graphviz.scif \
     && scif install $HOME/.packages/beautifulsoup.scif \
     && scif install $HOME/.packages/pytorch-gpu.scif \
-    && scif install $HOME/.packages/theano.scif \
     && scif install $HOME/.packages/dask.scif \
-    && scif install $HOME/.packages/libsvm.scif \
     && scif install $HOME/.packages/git-annex.scif \
-    && scif install $HOME/.packages/torch.scif \
-    && scif install $HOME/.packages/autosklearn.scif
+    && scif install $HOME/.packages/cupy.scif \
+    && scif install $HOME/.packages/pydata.scif
 
 EXPOSE 6000
 EXPOSE 8888
