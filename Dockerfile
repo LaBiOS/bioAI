@@ -62,6 +62,8 @@ ADD packages/gensim.scif /root/.packages/
 ADD packages/statsmodels.scif /root/.packages/
 ADD packages/shogun.scif /root/.packages/
 ADD packages/nupic.scif /root/.packages/
+ADD packages/orange3.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
