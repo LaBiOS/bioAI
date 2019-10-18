@@ -1,4 +1,0 @@
-%appinstall auto-sklearn
-
-curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install
-python -m pip --no-cache-dir install --upgrade auto-sklearn
