@@ -1,4 +1,4 @@
 %appinstall orange3
 
-conda install -c conda-forge orange3
+conda install -c conda-forge orange3 -y
 conda clean -tipy
