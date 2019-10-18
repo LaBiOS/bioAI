@@ -57,6 +57,8 @@ ADD packages/pydata.scif /root/.packages/
 ADD packages/cntk.scif /root/.packages/
 ADD packages/boost.scif /root/.packages/
 ADD packages/blocks.scif /root/.packages/
+ADD packages/neon.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
