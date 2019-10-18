@@ -120,7 +120,7 @@ RUN apt-get update \
     conda create -n py36 python=3.6 -y \
     && /bin/bash -c "exec $SHELL -l" \
     && /bin/bash -c "source $HOME/.bashrc" \
-    && /bin/bash -c "source activate py36" \
+    && /bin/bash -c "conda activate py36" \
     && \
 ##############################################################################
 # Install Scif
