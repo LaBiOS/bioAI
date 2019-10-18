@@ -55,7 +55,6 @@ ADD packages/torch.scif /root/.packages/
 ADD packages/cupy.scif /root/.packages/
 ADD packages/pydata.scif /root/.packages/
 ADD packages/cntk.scif /root/.packages/
-ADD packages/boost.scif /root/.packages/
 ADD packages/blocks.scif /root/.packages/
 ADD packages/neon.scif /root/.packages/
 ADD packages/gensim.scif /root/.packages/
@@ -164,7 +163,6 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/cupy.scif \
     && scif install $HOME/.packages/pydata.scif \
-    && scif install $HOME/.packages/boost.scif \
     && \
 ##############################################################################
 # Nonessential
