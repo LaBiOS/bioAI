@@ -56,6 +56,7 @@ ADD packages/git-annex.scif /root/.packages/
 ##############################################################################
 # ENVs
 ##############################################################################
+ARG conda_env=py36
 ENV DEBIAN_FRONTEND noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 ENV SHELL /bin/bash
@@ -118,20 +119,20 @@ RUN apt-get update \
 # So we decided to use Python 3.6 as the container default.
 # If you don't want to use these libraries, change your Python version to > 3.6.
 ##############################################################################
-    conda create -n py36 python=3.6 -y \
-    && ~/.conda/etc/profile.d/conda.sh \
-    && conda activate py36 \
-    && \
+    conda create -n py36 python=3.6 -y
+
+ENV CONDA_DEFAULT_ENV $conda_env
+
 ##############################################################################
 # Install Scif
 ##############################################################################
-    pip --no-cache-dir install scif \
-    && conda clean -tipy
-    
+RUN pip --no-cache-dir install scif \
+    && conda clean -tipy \
+    && \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-RUN scif install $HOME/.packages/dvc.scif \
+    scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
     && scif install $HOME/.packages/python.scif \
