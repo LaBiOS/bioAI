@@ -1,0 +1,3 @@
+%appinstall nervananeon
+
+python -m pip --no-cache-dir install --upgrade nervananeon
