@@ -56,7 +56,7 @@ ADD packages/git-annex.scif /root/.packages/
 ##############################################################################
 # ENVs
 ##############################################################################
-ARG conda_env=py36
+ENV conda_env=py36
 ENV DEBIAN_FRONTEND noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 ENV SHELL /bin/bash
