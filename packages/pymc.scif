@@ -1,0 +1,4 @@
+%appinstall pymc
+
+conda install -c https://conda.binstar.org/pymc pymc -y
+conda clean -tipy
