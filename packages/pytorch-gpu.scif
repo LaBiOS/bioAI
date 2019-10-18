@@ -1,4 +1,3 @@
 %appinstall pytorch-gpu
 
-conda install -c pytorch pytorch -y
-conda clean -tipy
+python -m pip --no-cache-dir install --upgrade torch torchvision
