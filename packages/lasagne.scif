@@ -1,4 +1,5 @@
 %appinstall Lasagne
 
-conda install -c anaconda lasagne
-conda clean -tipy
+git clone https://github.com/Lasagne/Lasagne ~/lasagne
+cd ~/lasagne
+python -m pip --no-cache-dir install --upgrade .
