@@ -63,6 +63,9 @@ ADD packages/statsmodels.scif /root/.packages/
 ADD packages/shogun.scif /root/.packages/
 ADD packages/nupic.scif /root/.packages/
 ADD packages/orange3.scif /root/.packages/
+ADD packages/pymc.scif /root/.packages/
+ADD packages/deap.scif /root/.packages/
+ADD packages/annoy.scif /root/.packages/
 
 
 ##############################################################################
