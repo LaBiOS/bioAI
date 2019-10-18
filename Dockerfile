@@ -58,7 +58,10 @@ ADD packages/cntk.scif /root/.packages/
 ADD packages/boost.scif /root/.packages/
 ADD packages/blocks.scif /root/.packages/
 ADD packages/neon.scif /root/.packages/
-
+ADD packages/gensim.scif /root/.packages/
+ADD packages/statsmodels.scif /root/.packages/
+ADD packages/shogun.scif /root/.packages/
+ADD packages/nupic.scif /root/.packages/
 
 ##############################################################################
 # ENVs
