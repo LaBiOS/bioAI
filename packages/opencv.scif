@@ -1,4 +1,4 @@
 %appinstall opencv
 
-conda install -y opencv
+conda install -c conda-forge opencv -y
 conda clean -tipy
