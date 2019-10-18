@@ -55,6 +55,8 @@ ADD packages/torch.scif /root/.packages/
 ADD packages/cupy.scif /root/.packages/
 ADD packages/pydata.scif /root/.packages/
 ADD packages/cntk.scif /root/.packages/
+ADD packages/boost.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
@@ -153,7 +155,8 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
     && scif install $HOME/.packages/dask.scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/cupy.scif \
-    && scif install $HOME/.packages/pydata.scif
+    && scif install $HOME/.packages/pydata.scif \
+    && scif install $HOME/.packages/boost.scif
 
 EXPOSE 6000
 EXPOSE 8888
