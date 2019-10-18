@@ -79,7 +79,7 @@ ENV JUPYTER_TYPE notebook
 ENV JUPYTER_PORT 8888
 ENV CONDA_DIR $HOME/.conda
 ENV PATH $CONDA_DIR:$CONDA_DIR/bin:$PATH
-
+ENV XDG_CACHE_HOME $HOME/.cache/
 
 ##############################################################################
 # Install base dependencies
