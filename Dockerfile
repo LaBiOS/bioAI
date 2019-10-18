@@ -26,8 +26,8 @@ ADD packages/dvc.scif /root/.packages/
 ADD packages/cuda.scif /root/.packages/
 ADD packages/cdnn.scif /root/.packages/
 ADD packages/jupyter.scif /root/.packages/
-ADD packages/python.scif /root/.packages/
-ADD packages/pythonML.scif /root/.packages/
+ADD packages/python-pkg.scif /root/.packages/
+ADD packages/pythonML-pkg.scif /root/.packages/
 ADD packages/tensorflow-gpu.scif /root/.packages/
 ADD packages/keras.scif /root/.packages/
 ADD packages/lasagne.scif /root/.packages/
@@ -152,10 +152,10 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
 ##############################################################################
     scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
-    && scif install $HOME/.packages/python.scif \
+    && scif install $HOME/.packages/python-pkg.scif \
     && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/jupyter.scif \
-    && scif install $HOME/.packages/pythonML.scif \
+    && scif install $HOME/.packages/pythonML-pkg.scif \
     && scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/mlflow.scif \
     && scif install $HOME/.packages/mlv-tools.scif \
