@@ -1,6 +1,6 @@
 %appinstall Jupyter
 
-conda install jupyter jupyter_core jupyterlab nb_conda ipython -y
+conda install notebook jupyterhub jupyterlab nb_conda ipython -y
 pip install bash_kernel
 python -m bash_kernel.install --user
 jupyter serverextension enable --py jupyterlab --sys-prefix
