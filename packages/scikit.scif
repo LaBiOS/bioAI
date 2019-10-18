@@ -1,4 +1,3 @@
 %appinstall SciKit
 
-conda install -y scikit-image scikit-learn
-conda clean -tipy
+python -m pip --no-cache-dir install --upgrade scikit-learn scikit-image auto-sklearn scikit-bio
