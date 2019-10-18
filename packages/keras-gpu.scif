@@ -1,4 +1,0 @@
-%appinstall Keras
-
-conda install -y keras-gpu
-conda clean -tipy
