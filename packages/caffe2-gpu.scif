@@ -1,4 +1,4 @@
-%appinstall caffe2
+%appinstall caffe2-gpu
 
 conda install -c caffe2 caffe2-cuda9.0-cudnn7 -y
 conda clean -tipy
