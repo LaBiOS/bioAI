@@ -1,0 +1,3 @@
+%appinstall annoy
+
+python -m pip --no-cache-dir install --upgrade annoy
