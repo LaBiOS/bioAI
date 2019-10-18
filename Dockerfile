@@ -52,6 +52,7 @@ ADD packages/beautifulsoup.scif /root/.packages/
 ADD packages/dm-sonnet-gpu.scif /root/.packages/
 ADD packages/xgboost.scif /root/.packages/
 ADD packages/git-annex.scif /root/.packages/
+ADD packages/autosklearn.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -161,7 +162,8 @@ RUN pip --no-cache-dir install scif \
     && scif install $HOME/.packages/lasagne.scif \
     && scif install $HOME/.packages/dm-sonnet-gpu.scif \
     && scif install $HOME/.packages/xgboost.scif \
-    && scif install $HOME/.packages/git-annex.scif
+    && scif install $HOME/.packages/git-annex.scif \
+    && scif install $HOME/.packages/autosklearn.scif
 
 EXPOSE 6000
 EXPOSE 8888
