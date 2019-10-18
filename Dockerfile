@@ -39,7 +39,6 @@ ADD packages/chainer.scif /root/.packages/
 ADD packages/mxnet.scif /root/.packages/
 ADD packages/onnx.scif /root/.packages/
 ADD packages/caffe.scif /root/.packages/
-ADD packages/torch.scif /root/.packages/
 ADD packages/mlflow.scif /root/.packages/
 ADD packages/mlvtools.scif /root/.packages/
 ADD packages/scikit.scif /root/.packages/
@@ -156,7 +155,6 @@ RUN pip --no-cache-dir install scif \
     && scif install $HOME/.packages/mxnet.scif \
     && scif install $HOME/.packages/onnx.scif \
     && scif install $HOME/.packages/caffe.scif \
-    && scif install $HOME/.packages/torch.scif \
     && scif install $HOME/.packages/dask.scif \
     && scif install $HOME/.packages/libsvm.scif \
     && scif install $HOME/.packages/lasagne.scif \
