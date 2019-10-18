@@ -56,7 +56,7 @@ ADD packages/cupy.scif /root/.packages/
 ADD packages/pydata.scif /root/.packages/
 ADD packages/cntk.scif /root/.packages/
 ADD packages/boost.scif /root/.packages/
-
+ADD packages/blocks.scif /root/.packages/
 
 ##############################################################################
 # ENVs
