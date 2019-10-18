@@ -146,7 +146,7 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
     && scif install $HOME/.packages/tensorflow-gpu.scif \
     && scif install $HOME/.packages/keras.scif \
     && scif install $HOME/.packages/mlflow.scif \
-    && scif install $HOME/.packages/mlvtools.scif \
+    && scif install $HOME/.packages/mlv-tools.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/graphviz.scif \
