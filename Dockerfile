@@ -5,7 +5,7 @@ MAINTAINER Fabiano Menegidio <fabiano.menegidio@biology.bio.br>
 # Metadata
 ##############################################################################
 LABEL base.image="ubuntu:18.04"
-LABEL name.image="bioLogic"
+LABEL name.image="bioLearning"
 LABEL version="1.0"
 LABEL description="An all-in-one Docker image for Machine Learning and Deep Learning."
 LABEL website=""
