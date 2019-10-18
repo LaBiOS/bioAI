@@ -147,19 +147,10 @@ RUN pip --no-cache-dir install scif \
     && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/graphviz.scif \
     && scif install $HOME/.packages/beautifulsoup.scif \
-    && scif install $HOME/.packages/darknet.scif \
     && scif install $HOME/.packages/pytorch-gpu.scif \
     && scif install $HOME/.packages/theano.scif \
-    && scif install $HOME/.packages/opencv.scif \
-    && scif install $HOME/.packages/chainer.scif \
-    && scif install $HOME/.packages/mxnet.scif \
-    && scif install $HOME/.packages/onnx.scif \
-    && scif install $HOME/.packages/caffe.scif \
     && scif install $HOME/.packages/dask.scif \
     && scif install $HOME/.packages/libsvm.scif \
-    && scif install $HOME/.packages/lasagne.scif \
-    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
-    && scif install $HOME/.packages/xgboost.scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/autosklearn.scif
 
