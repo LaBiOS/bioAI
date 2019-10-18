@@ -1,4 +1,3 @@
 %appinstall Python ML
 
-conda install -y numpy scipy nose h5py matplotlib pandas sympy numba
-conda clean -tipy
+python -m pip --no-cache-dir install --upgrade numpy scipy nose h5py matplotlib pandas sympy numba
