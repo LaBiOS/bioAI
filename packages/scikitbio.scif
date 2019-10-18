@@ -1,4 +1,0 @@
-%appinstall scikit-bio
-
-conda install -y scikit-bio
-conda clean -tipy
