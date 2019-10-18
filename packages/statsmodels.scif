@@ -1,4 +1,4 @@
 %appinstall statsmodels
 
-conda install -c conda-forge statsmodels
+conda install -c conda-forge statsmodels -y
 conda clean -tipy
