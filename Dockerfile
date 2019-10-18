@@ -147,26 +147,33 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    scif install $HOME/.packages/dvc.scif \
-    && scif install $HOME/.packages/cuda.scif \
+##############################################################################
+# Essentials
+##############################################################################
+    scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
     && scif install $HOME/.packages/python.scif \
+    && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/pythonML.scif \
-    && scif install $HOME/.packages/tensorflow-gpu.scif \
-    && scif install $HOME/.packages/keras.scif \
+    && scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/mlflow.scif \
     && scif install $HOME/.packages/mlv-tools.scif \
-    && scif install $HOME/.packages/scikit.scif \
-    && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/graphviz.scif \
-    && scif install $HOME/.packages/beautifulsoup.scif \
-    && scif install $HOME/.packages/pytorch-gpu.scif \
     && scif install $HOME/.packages/dask.scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/cupy.scif \
     && scif install $HOME/.packages/pydata.scif \
-    && scif install $HOME/.packages/boost.scif
+    && scif install $HOME/.packages/boost.scif \
+    && \
+##############################################################################
+# Nonessential
+##############################################################################
+    scif install $HOME/.packages/tensorflow-gpu.scif \
+    && scif install $HOME/.packages/keras.scif \
+    && scif install $HOME/.packages/scikit.scif \
+    && scif install $HOME/.packages/beautifulsoup.scif \
+    && scif install $HOME/.packages/pytorch-gpu.scif
 
 EXPOSE 6000
 EXPOSE 8888
