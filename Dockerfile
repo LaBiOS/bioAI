@@ -144,7 +144,7 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
 # Install packages through Scif
 ##############################################################################
 ##############################################################################
-# Essentials
+# Essentials Install
 ##############################################################################
     scif install $HOME/.packages/cuda.scif \
     && scif install $HOME/.packages/cdnn.scif \
@@ -162,13 +162,41 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
     && scif install $HOME/.packages/pydata.scif \
     && \
 ##############################################################################
-# Nonessential
+# Nonessential Install
 ##############################################################################
     scif install $HOME/.packages/tensorflow-gpu.scif \
     && scif install $HOME/.packages/keras.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/beautifulsoup.scif \
-    && scif install $HOME/.packages/pytorch-gpu.scif
+    && scif install $HOME/.packages/pytorch-gpu.scif \
+    && \
+##############################################################################
+# Nonessential
+##############################################################################
+    scif install $HOME/.packages/caffe-gpu.scif \
+    && scif install $HOME/.packages/caffe2-gpu.scif \
+    && scif install $HOME/.packages/chainer.scif \
+    && scif install $HOME/.packages/darknet.scif \
+    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
+    && scif install $HOME/.packages/lasagne.scif \
+    && scif install $HOME/.packages/libsvm.scif \
+    && scif install $HOME/.packages/mxnet.scif \
+    && scif install $HOME/.packages/onnx.scif \
+    && scif install $HOME/.packages/opencv.scif \
+    && scif install $HOME/.packages/theano.scif \
+    && scif install $HOME/.packages/torch,scif \
+    && scif install $HOME/.packages/xgboost.scif \
+    && scif install $HOME/.packages/cntk.scif \
+    && scif install $HOME/.packages/blocks.scif \
+    && scif install $HOME/.packages/neon.scif \
+    && scif install $HOME/.packages/gensim.scif \
+    && scif install $HOME/.packages/statsmodels.scif \
+    && scif install $HOME/.packages/shogun.scif \
+    && scif install $HOME/.packages/nupic.scif \
+    && scif install $HOME/.packages/orange3.scif \
+    && scif install $HOME/.packages/pymc.scif \
+    && scif install $HOME/.packages/deap.scif \
+    && scif install $HOME/.packages/annoy.scif
 
 EXPOSE 6000
 EXPOSE 8888
