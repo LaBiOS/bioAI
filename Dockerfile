@@ -173,9 +173,7 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
 ##############################################################################
 # Nonessential
 ##############################################################################
-    scif install $HOME/.packages/caffe-gpu.scif \
-    && scif install $HOME/.packages/caffe2-gpu.scif \
-    && scif install $HOME/.packages/chainer.scif \
+    scif install $HOME/.packages/chainer.scif \
     && scif install $HOME/.packages/darknet.scif \
     && scif install $HOME/.packages/dm-sonnet-gpu.scif \
     && scif install $HOME/.packages/lasagne.scif \
