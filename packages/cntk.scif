@@ -1,3 +1,3 @@
 %appinstall cntk
 
-python -m pip --no-cache-dir install --upgrade cntk
+python -m pip --no-cache-dir install --upgrade cntk-gpu 2.7
