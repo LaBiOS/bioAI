@@ -182,7 +182,7 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
     && scif install $HOME/.packages/onnx.scif \
     && scif install $HOME/.packages/opencv.scif \
     && scif install $HOME/.packages/theano.scif \
-    && scif install $HOME/.packages/torch,scif \
+    && scif install $HOME/.packages/torch.scif \
     && scif install $HOME/.packages/xgboost.scif \
     && scif install $HOME/.packages/cntk.scif \
     && scif install $HOME/.packages/blocks.scif \
