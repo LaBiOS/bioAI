@@ -30,16 +30,9 @@ ADD packages/python-pkg.scif /root/.packages/
 ADD packages/pythonML-pkg.scif /root/.packages/
 ADD packages/tensorflow-gpu.scif /root/.packages/
 ADD packages/keras.scif /root/.packages/
-ADD packages/lasagne.scif /root/.packages/
-ADD packages/darknet.scif /root/.packages/
 ADD packages/pytorch-gpu.scif /root/.packages/
 ADD packages/theano.scif /root/.packages/
 ADD packages/opencv.scif /root/.packages/
-ADD packages/chainer.scif /root/.packages/
-ADD packages/mxnet.scif /root/.packages/
-ADD packages/onnx.scif /root/.packages/
-ADD packages/caffe-gpu.scif /root/.packages/
-ADD packages/caffe2-gpu.scif /root/.packages/
 ADD packages/mlflow.scif /root/.packages/
 ADD packages/mlv-tools.scif /root/.packages/
 ADD packages/scikit.scif /root/.packages/
@@ -48,24 +41,10 @@ ADD packages/dask.scif /root/.packages/
 ADD packages/libsvm.scif /root/.packages/
 ADD packages/graphviz.scif /root/.packages/
 ADD packages/beautifulsoup.scif /root/.packages/
-ADD packages/dm-sonnet-gpu.scif /root/.packages/
 ADD packages/xgboost.scif /root/.packages/
 ADD packages/git-annex.scif /root/.packages/
-ADD packages/torch.scif /root/.packages/
 ADD packages/cupy.scif /root/.packages/
 ADD packages/pydata.scif /root/.packages/
-ADD packages/cntk.scif /root/.packages/
-ADD packages/blocks.scif /root/.packages/
-ADD packages/neon.scif /root/.packages/
-ADD packages/gensim.scif /root/.packages/
-ADD packages/statsmodels.scif /root/.packages/
-ADD packages/shogun.scif /root/.packages/
-ADD packages/nupic.scif /root/.packages/
-ADD packages/orange3.scif /root/.packages/
-ADD packages/pymc.scif /root/.packages/
-ADD packages/deap.scif /root/.packages/
-ADD packages/annoy.scif /root/.packages/
-
 
 ##############################################################################
 # ENVs
@@ -173,28 +152,9 @@ RUN python -m pip --no-cache-dir install --upgrade scif \
 ##############################################################################
 # Nonessential
 ##############################################################################
-    scif install $HOME/.packages/chainer.scif \
-    && scif install $HOME/.packages/darknet.scif \
-    && scif install $HOME/.packages/dm-sonnet-gpu.scif \
-    && scif install $HOME/.packages/lasagne.scif \
-    && scif install $HOME/.packages/libsvm.scif \
-    && scif install $HOME/.packages/mxnet.scif \
-    && scif install $HOME/.packages/onnx.scif \
-    && scif install $HOME/.packages/opencv.scif \
+    scif install $HOME/.packages/opencv.scif \
     && scif install $HOME/.packages/theano.scif \
-    && scif install $HOME/.packages/torch.scif \
-    && scif install $HOME/.packages/xgboost.scif \
-    && scif install $HOME/.packages/cntk.scif \
-    && scif install $HOME/.packages/blocks.scif \
-    && scif install $HOME/.packages/neon.scif \
-    && scif install $HOME/.packages/gensim.scif \
-    && scif install $HOME/.packages/statsmodels.scif \
-    && scif install $HOME/.packages/shogun.scif \
-    && scif install $HOME/.packages/nupic.scif \
-    && scif install $HOME/.packages/orange3.scif \
-    && scif install $HOME/.packages/pymc.scif \
-    && scif install $HOME/.packages/deap.scif \
-    && scif install $HOME/.packages/annoy.scif
+    && scif install $HOME/.packages/xgboost.scif
 
 EXPOSE 6000
 EXPOSE 8888
