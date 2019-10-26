@@ -1,9 +1,6 @@
 %appinstall SciKit
 
-#curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt \
-#  | xargs -n 1 -L 1 pip install
+curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt \
+  | xargs -n 1 -L 1 pip install
 
-python -m pip --no-cache-dir install --upgrade scikit-learn>=0.20 scipy>=0.14.1 numpy>=1.9.0 setuptools nose \
-  Cython lockfile joblib psutil pyyaml liac-arff pandas ConfigSpace>=0.4.0,<0.5 pynisher>=0.4.2 pyrfr>=0.7,<0.9 smac==0.8
-  
 python -m pip --no-cache-dir install --upgrade auto-sklearn scikit-mdr skrebate
