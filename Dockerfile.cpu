@@ -1,10 +1,10 @@
-FROM ubuntu:18.04
+FROM ubuntu:latest
 MAINTAINER Fabiano Menegidio <fabiano.menegidio@biology.bio.br>
 
 ##############################################################################
 # Metadata
 ##############################################################################
-LABEL base.image="bioAI:cpu"
+LABEL base.image="BioLearning:cpu"
 LABEL version="1"
 LABEL description=""
 LABEL website=""
@@ -23,12 +23,8 @@ ADD .config/bashrc/.bash_profile $HOME/.bash_profile
 ##############################################################################
 # ADD packages files
 ##############################################################################
-ADD packages/dvc.scif /root/.packages/
 ADD packages/jupyter.scif /root/.packages/
 ADD packages/python.scif /root/.packages/
-ADD packages/pythonML.scif /root/.packages/
-ADD packages/tensorflow.scif /root/.packages/
-ADD packages/keras.scif /root/.packages/
 
 ##############################################################################
 # ENVs
@@ -86,12 +82,10 @@ RUN apt-get update \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    scif install $HOME/.packages/dvc.scif \
-    && scif install $HOME/.packages/jupyter.scif \
-    && scif install $HOME/.packages/python.scif \
-    && scif install $HOME/.packages/pythonML.scif \
-    && scif install $HOME/.packages/tensorflow.scif \
-    && scif install $HOME/.packages/keras.scif
+    scif install $HOME/.packages/biopython.scif \
+    && scif install $HOME/.packages/git-annex.scif \
+    && scif install $HOME/.packages/git-lfs.scif \
+    && scif install $HOME/.packages/jupyter.scif
     
 EXPOSE 6000
 EXPOSE 8888
