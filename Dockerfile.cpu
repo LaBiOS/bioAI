@@ -85,6 +85,7 @@ RUN apt-get update \
     scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/git-lfs.scif \
+    && scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/jupyter.scif
     
 EXPOSE 6000
