@@ -1,4 +1,4 @@
 %appinstall Jupyter
 
-conda install notebook jupyterhub jupyterlab nb_conda ipython -y
+conda install notebook jupyterhub jupyterlab nb_conda ipython bash_kernel -y
 conda update --all && conda clean -tipy
