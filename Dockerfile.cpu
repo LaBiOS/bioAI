@@ -30,6 +30,7 @@ ADD packages/biopython.scif /root/.packages/
 ADD packages/git-annex.scif /root/.packages/
 ADD packages/git-lfs.scif /root/.packages/
 ADD packages/dvc.scif /root/.packages/
+ADD packages/mlflow.scif /root/.packages/
 
 
 ##############################################################################
@@ -94,7 +95,8 @@ RUN apt-get update \
     && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/git-lfs.scif \
-    && scif install $HOME/.packages/dvc.scif
+    && scif install $HOME/.packages/dvc.scif \
+    && scif install $HOME/.packages/mlflow.scif
     
 EXPOSE 6000
 EXPOSE 8888
