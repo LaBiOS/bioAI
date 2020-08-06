@@ -24,7 +24,12 @@ ADD .config/bashrc/.bash_profile $HOME/.bash_profile
 # ADD packages files
 ##############################################################################
 ADD packages/jupyter.scif /root/.packages/
-ADD packages/python.scif /root/.packages/
+ADD packages/python-pkg.scif /root/.packages/
+ADD packages/biopython.scif /root/.packages/
+ADD packages/git-annex.scif /root/.packages/
+ADD packages/git-lfs.scif /root/.packages/
+ADD packages/dvc.scif /root/.packages/
+
 
 ##############################################################################
 # ENVs
