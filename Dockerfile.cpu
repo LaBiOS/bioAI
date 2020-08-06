@@ -100,7 +100,8 @@ RUN apt-get update \
     && scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/beautifulsoup.scif \
     && scif install $HOME/.packages/mlflow.scif \
-    && scif install $HOME/.packages/dask.scif
+    && scif install $HOME/.packages/dask.scif \
+    && scif install $HOME/.packages/pydata.scif
    
     
 EXPOSE 6000
