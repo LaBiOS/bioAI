@@ -97,7 +97,7 @@ RUN apt-get update \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/git-lfs.scif \
     && scif install $HOME/.packages/dvc.scif \
-    && scif install $HOME/beautifulsoup.scif \
+    && scif install $HOME/.packages/beautifulsoup.scif \
     && scif install $HOME/.packages/mlflow.scif \
     && scif install $HOME/.packages/dask.scif
    
