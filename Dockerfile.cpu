@@ -88,7 +88,8 @@ RUN apt-get update \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    scif install $HOME/.packages/python-pkg.scif
+    scif install $HOME/.packages/python-pkg.scif \
+    scif install $HOME/.packages/pythonML-pkg.scif
     
 EXPOSE 6000
 EXPOSE 8888
