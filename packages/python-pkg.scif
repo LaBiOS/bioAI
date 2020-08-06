@@ -1,6 +1,5 @@
 %appinstall Python Packages
 
-python -m pip --no-cache-dir install --upgrade pyopenssl ndg-httpsclient pyasn1 Cython path.py \ 
-  Pillow pygments six sphinx wheel zmq cloudpickle joblib deap update_checker tqdm stopit
+python -m pip --no-cache-dir install --upgrade pyopenssl ndg-httpsclient pyasn1 Cython path.py
   
   
