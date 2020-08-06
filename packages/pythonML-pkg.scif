@@ -1,4 +1,4 @@
 %appinstall Python ML
 
-python -m pip --no-cache-dir install --upgrade numpy scipy nose h5py matplotlib pandas sympy numba
+python -m pip --no-cache-dir install --upgrade numpy scipy nose h5py matplotlib pandas sympy numba pytpy pandavro pyyaml
 MPLBACKEND=Agg python -c "import matplotlib.pyplot"
