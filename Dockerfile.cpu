@@ -82,7 +82,8 @@ RUN apt-get update \
 ##############################################################################
 # Install packages through Scif
 ##############################################################################
-    scif install $HOME/.packages/biopython.scif \
+    scif install $HOME/.packages/python-pkg.scif \
+    && scif install $HOME/.packages/biopython.scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/git-lfs.scif \
     && scif install $HOME/.packages/dvc.scif \
