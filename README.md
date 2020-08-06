@@ -2,6 +2,8 @@
 
 ---
 
+This repository / manuscript introduces and describes BioLearning, an all-in-one Docker image based on Ubuntu 18.04 (LTS - Bionic Beaver), which automates the installation of more than 50 machine-learning, deep-learning, data science and web scraping related packages and its respective libraries, in different computational environments, which will hopefully contribute to the delivery of consistent, reproducible and replicable results by the scientific community, assisting in the development of open science projects.
+
 ---
 
 ## Author <a name="Author" /> [[menu]](#menu)
