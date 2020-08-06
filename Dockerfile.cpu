@@ -33,6 +33,7 @@ ADD packages/dvc.scif /root/.packages/
 ADD packages/mlflow.scif /root/.packages/
 ADD packages/pydata.scif /root/.packages/
 ADD packages/dask.scif /root/.packages/
+ADD packages/beautifulsoup.scif /root/.packages/
 
 ##############################################################################
 # ENVs
