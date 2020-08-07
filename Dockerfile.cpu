@@ -39,6 +39,7 @@ ADD packages/mlv-tools.scif /root/.packages/
 ADD packages/statsmodels.scif /root/.packages/
 ADD packages/seaborn.scif /root/.packages/
 ADD packages/sklearn.scif /root/.packages/
+ADD packages/scikit.scif /root/.packages/
 
 
 ##############################################################################
@@ -112,7 +113,8 @@ RUN apt-get update \
     && scif install $HOME/.packages/mlv-tools.scif \
     && scif install $HOME/.packages/statsmodels.scif \
     && scif install $HOME/.packages/seaborn.scif \
-    && scif install $HOME/.packages/sklearn.scif
+    && scif install $HOME/.packages/sklearn.scif \
+    && scif install $HOME/.packages/scikit.scif \
     
 EXPOSE 6000
 EXPOSE 8888
