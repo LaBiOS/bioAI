@@ -41,6 +41,7 @@ ADD packages/seaborn.scif /root/.packages/
 ADD packages/sklearn.scif /root/.packages/
 ADD packages/scikit.scif /root/.packages/
 ADD packages/tensorflow.scif /root/.packages/
+ADD packages/keras.scif /root/.packages/
 
 
 ##############################################################################
@@ -116,7 +117,8 @@ RUN apt-get update \
     && scif install $HOME/.packages/seaborn.scif \
     && scif install $HOME/.packages/sklearn.scif \
     && scif install $HOME/.packages/scikit.scif \
-    && scif install $HOME/.packages/tensorflow.scif
+    && scif install $HOME/.packages/tensorflow.scif \
+    && scif install $HOME/.packages/keras.scif
     
 EXPOSE 6000
 EXPOSE 8888
