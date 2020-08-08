@@ -1,7 +1,6 @@
 %appinstall SciKit
 
+apt-get update
 apt-get install build-essential swig -y
 
 curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install
-
-python -m pip --no-cache-dir install --upgrade auto-sklearn scikit-mdr skrebate
