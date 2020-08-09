@@ -106,15 +106,19 @@ RUN apt-get update \
     && scif install $HOME/.packages/jupyter.scif \
     && scif install $HOME/.packages/git-annex.scif \
     && scif install $HOME/.packages/git-lfs.scif \
-    && scif install $HOME/.packages/dvc.scif \
     && scif install $HOME/.packages/beautifulsoup.scif \
-    && scif install $HOME/.packages/mlflow.scif \
     && scif install $HOME/.packages/dask.scif \
     && scif install $HOME/.packages/pydata.scif \
     && scif install $HOME/.packages/graphviz.scif \
-    && scif install $HOME/.packages/mlv-tools.scif \
     && scif install $HOME/.packages/statsmodels.scif \
     && scif install $HOME/.packages/seaborn.scif \
+    && \
+##############################################################################
+# Install ML e DL packages through Scif
+##############################################################################
+    scif install $HOME/.packages/dvc.scif \
+    && scif install $HOME/.packages/mlflow.scif \
+    && scif install $HOME/.packages/mlv-tools.scif \
     && scif install $HOME/.packages/sklearn.scif \
     && scif install $HOME/.packages/scikit.scif \
     && scif install $HOME/.packages/tensorflow.scif \
