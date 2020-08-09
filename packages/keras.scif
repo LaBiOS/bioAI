@@ -1,3 +1,4 @@
 %appinstall Keras
 
-python -m pip --no-cache-dir install --upgrade keras
+conda install -c conda-forge keras -y
+conda clean -tipy
